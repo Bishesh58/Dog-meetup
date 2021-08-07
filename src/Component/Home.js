@@ -1,10 +1,13 @@
 import React from 'react';
 import './Home.css';
+import Banner from './Banner';
+import CustomerReview from './CustomerReview';
 
 function Home() {
     return (
         <div className="home">
-            you are on home page
+            <Banner />
+            <CustomerReview />
         </div>
     )
 }

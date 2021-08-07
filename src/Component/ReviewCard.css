@@ -1,0 +1,37 @@
+.reviewCard {
+  height: 300px;
+  width: 300px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  overflow: auto;
+}
+
+.reviewCard__top {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 10px;
+}
+.reviewCard__top--name {
+  display: flex;
+}
+
+.reviewCard__top--name > p {
+  padding: 4px;
+}
+
+.reviewCard__bottom {
+  color: rgb(85, 95, 98);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  
+}
+
+.reviewCard__bottom > h4 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
