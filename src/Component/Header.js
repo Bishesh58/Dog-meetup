@@ -1,36 +1,41 @@
 import logo from "../img/logo.png";
 import "./Header.css";
 import { Link } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 
 function Header() {
   return (
     <div className="header">
-      <div className="header__left">
-        <img src={logo} alt="" />
-        <h3>Dog Meetup</h3>
-      </div>
-      <div></div>
-      <div></div>
-      <div className="header__right">
-        <ul>
+      <div className="header__container">
+        <div className="header__container--left">
+          <img src={logo} alt="" />
+          <h3>Dog Meetup</h3>
+        </div>
+        <div className="header__container--right">
           <Link to="/" className="header__links">
-            <li>Home</li>
+            <Button>Home</Button>
           </Link>
           <Link to="/about" className="header__links">
-            <li>About</li>
+            <Button>About</Button>
           </Link>
           <Link to="/contact" className="header__links">
-            <li>Contact</li>
+            <Button>Contact</Button>
           </Link>
 
           <Link to="/login" className="header__links">
-            <li>Login</li>
+            <Button>Login</Button>
           </Link>
 
           <Link to="/register" className="header__links">
-            <li className="register">Register</li>
+            <Button
+              variant="contained"
+              disableElevation
+              style={{ backgroundColor: "#5577d2", color: "#FFFFFF" }}
+            >
+              Register
+            </Button>
           </Link>
-        </ul>
+        </div>
       </div>
     </div>
   );

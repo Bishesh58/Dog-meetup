@@ -1,0 +1,19 @@
+.customerReview{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    
+}
+
+.customerReview__title {
+    font-size: 24px;
+    padding: 16px 0;
+}
+
+.customerReview__cards{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+   
+}
