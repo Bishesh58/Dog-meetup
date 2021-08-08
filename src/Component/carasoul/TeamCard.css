@@ -1,0 +1,50 @@
+.teamCard {
+  width: 400px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-bottom: 30px;
+}
+
+.teamCard__top {
+  height: 120px;
+  width: 100%;
+  /* background-color: rgb(130, 64, 196); */
+}
+
+.teamCard__middle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: -50px;
+}
+
+.teamCard__bottom {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.teamCard__bottom > h3 {
+  padding: 10px;
+  font-size: larger;
+}
+
+.teamCard__bottom p {
+    padding: 10px;
+    font-size: large;
+    color: rgb(94, 72, 157);
+}
+
+.socialIcons {
+  font-size: 32px;
+}
+
+.teamCard__bottom--links > .MuiSvgIcon-root {
+  font-size: 30px;
+  cursor: pointer;  
+}

@@ -1,0 +1,22 @@
+.team {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.team__title {
+    padding: 30px 0px;
+    font-size: 32px;
+}
+
+hr {
+    height: 1px;
+    background-color: rgb(24, 68, 24);
+    border: none;
+}
+
+.team__cards {
+    display: flex;
+}
