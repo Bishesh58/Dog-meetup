@@ -32,9 +32,11 @@ function App() {
               <Register />
             </Route>
           </Switch>
-          <Footer />
+          
         </div>
+
       </Router>
+      <Footer />
     </div>
   );
 }
