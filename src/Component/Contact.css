@@ -1,6 +1,6 @@
 .contact {
   height: 100%;
-  min-height: 100vh;
+  min-height: 90vh;
   width: 100%;
   margin-top: 20px;
   display: flex;
@@ -13,8 +13,11 @@
 }
 
 .contact__title > h1 {
+  font-size: x-large;
+  padding: 5px;
+  text-transform: uppercase;
   color: #5577d2;
-  border-bottom: 3px solid #5577d2;
+  border: 3px solid #5577d2;
   display: inline-block;
   border-radius: 5px;
 }

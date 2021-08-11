@@ -12,7 +12,7 @@ function TeamCard({name, role, imgUrl}) {
       <div className="teamCard__middle">
         <Avatar
           src={imgUrl}
-          style={{ height: "300px", width: "300px" }}
+          style={{ height: "250px", width: "250px" }}
         />
       </div>
       <div className="teamCard__bottom">
