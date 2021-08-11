@@ -1,10 +1,9 @@
 import React from 'react';
 import './Home.css';
 import Banner from './Banner';
-
 import CustomerReview from './CustomerReview';
 import CarasoulComp from './carasoul/CarasoulComp';
-import Team from './Team';
+
 
 
 function Home() {
@@ -12,7 +11,6 @@ function Home() {
         <div className="home">
             <Banner />
             <CarasoulComp />
-            <Team />
             <CustomerReview />
         </div>
     )

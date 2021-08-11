@@ -1,5 +1,5 @@
 import React from "react";
-import TeamCard from "./carasoul/TeamCard";
+import TeamCard from "./TeamCard";
 import "./Team.css";
 
 function Team() {
