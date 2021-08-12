@@ -2,6 +2,8 @@ import logo from "../img/logo.png";
 import "./Header.css";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import { Avatar } from "@material-ui/core";
+import IconButton from "@material-ui/core/IconButton";
 
 function Header() {
   return (
@@ -33,6 +35,11 @@ function Header() {
               style={{ backgroundColor: "#5577d2", color: "#FFFFFF" }}
             >
               Register
+            </Button>
+          </Link>
+          <Link to="/profile" className="header__links">
+            <Button style={{ padding: "2px 8px" }}>
+              <Avatar></Avatar>
             </Button>
           </Link>
         </div>
