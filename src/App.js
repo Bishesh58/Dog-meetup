@@ -10,6 +10,7 @@ import Footer from "./Component/Footer";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Profile from "./Component/Profile";
 
+
 function App() {
   return (
     <div className="app">

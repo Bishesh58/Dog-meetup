@@ -7,6 +7,9 @@ function Register() {
   const getAddress=(result, lat, lng, text)=>{
     console.log(result);
   }
+  const handleSubmit =(e)=>{
+    e.preventDefault();
+  }
   return (
     <div className="register">
       <div className="register__container">
@@ -14,7 +17,8 @@ function Register() {
           <img src={imgRegister} alt="" />
         </div>
         <div className="register__container--right">
-          <form>
+          <form onSubmit={handleSubmit}>
+          <h3>Register a new account</h3>
             <input placeholder="First Name" type="fname" />
             <input placeholder="Last Name" type="lname" />
             <input placeholder="Email" type="email" />
@@ -29,7 +33,7 @@ function Register() {
               resetSearch={false}
             />
 
-            <button type="submit" onClick="">
+            <button >
               Sign up
             </button>
           </form>

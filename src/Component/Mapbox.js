@@ -8,7 +8,7 @@ import { Avatar } from "@material-ui/core";
 function Mapbox() {
   const [viewport, setViewport] = useState({
     width: "80vw",
-    height: "80vh",
+    height: "50vh",
     latitude: -36.848461,
     longitude: 174.763336,
     zoom: 13,
@@ -52,6 +52,44 @@ function Mapbox() {
             <li>running</li>
             <li>jumping</li>
             <li>playing with other</li>
+            <p>Mt Eden Submit,</p>
+            <p> Mt eden Auckland</p>
+            <button>Going</button> 3
+          </div>
+        </Popup>
+
+        <Marker
+          latitude={-36.883512}
+          longitude={174.736739}
+          offsetLeft={-20}
+          offsetTop={-10}
+        >
+          <div>
+            <RoomIcon
+              style={{ fontSize: viewport.zoom * 3, color: "#c56cf0" }}
+            ></RoomIcon>
+          </div>
+        </Marker>
+        <Popup
+          latitude={-36.883512}
+          longitude={174.736739}
+          closeButton={true}
+          closeOnClick={false}
+          //   onClose={() => togglePopup(false)}
+          anchor="right"
+        >
+          <div className="eventCard">
+            <div className="dogName">
+              <Avatar />
+              <p>Max</p>
+            </div>
+            <p>Irish Setter</p>
+            <p>Agility</p>
+            <li>Free style musical dance</li>
+            <li>Frisbee</li>
+            <li>playing with other</li>
+            <p>60 Balmoral Rd,</p>
+            <p> Mt eden,Auckland</p>
             <button>Going</button> 3
           </div>
         </Popup>
