@@ -8,6 +8,8 @@ import Login from "./Component/Login";
 import Register from "./Component/Register";
 import Footer from "./Component/Footer";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Profile from "./Component/Profile";
+
 
 function App() {
   return (
@@ -27,6 +29,9 @@ function App() {
             </Route>
             <Route path="/login" component={Login} exact>
               <Login />
+            </Route>
+            <Route path="/profile" component={Profile} exact>
+              <Profile />
             </Route>
             <Route path="/register" component={Register} exact>
               <Register />

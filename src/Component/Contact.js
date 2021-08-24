@@ -6,7 +6,7 @@ function Contact() {
     <div className="contact">
       <div className="contact__title">
         <h1>Get in touch !</h1>
-        <p>Contact us for any query, help us to improve our service.</p>
+        <p>Have any queries?? Contact us to get help, and to help us to improve our service.</p>
       </div>
       <div className="contact__container">
         <div className="contact__form">

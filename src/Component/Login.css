@@ -47,7 +47,9 @@
   margin-bottom: 10px;
   border-radius: 5px;
 }
-
+.login__container--right > form > h3 {
+  padding: 10px 0;
+}
 .login__container--right > form > button {
   width: 350px;
   height: 50px;
@@ -56,6 +58,7 @@
   background-color: #1abc9c;
   border-radius: 5px;
   border: none;
+  cursor: pointer;
 }
 
 .login__left > img {

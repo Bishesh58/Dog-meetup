@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useContext, useRef } from "react";
 import "./Login.css";
 import imgLogin from "../img/imgLogin.jpeg";
 
 function Login() {
+  const email = useRef();
+  const password = useRef();
+ 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  
+  };
   return (
     <div className="login">
       <div className="login__container">
@@ -10,12 +17,19 @@ function Login() {
           <img src={imgLogin} alt="" />
         </div>
         <div className="login__container--right">
-          <form>
-            <input placeholder="Email" type="email" />
+          <form onSubmit={handleSubmit}>
+          <h3>Sign in to your account</h3>
+            <input placeholder="Email" type="email" ref={email} required />
 
-            <input placeholder="Password" type="password" />
+            <input
+              placeholder="Password"
+              type="password"
+              ref={password}
+              required
+              minLength="6"
+            />
 
-            <button type="submit" onClick="">
+            <button >
               Sign in
             </button>
             <p>

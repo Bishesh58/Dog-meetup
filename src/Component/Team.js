@@ -25,6 +25,11 @@ function Team() {
           role="Developer"
           imgUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5Oj-aidV0FDTMedRSkDYvTXDHFMxz-t8TTQTJe6qRIH3vinRuZkbR1VxGHXZDYYP9Xw4&usqp=CAU"
         />
+        <TeamCard
+          name="Daniel Kim"
+          role="Product Owner"
+          imgUrl="https://static6.depositphotos.com/1003617/541/v/950/depositphotos_5416637-stock-illustration-face-man.jpg"
+        />
       </div>
     </div>
   );
