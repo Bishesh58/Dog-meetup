@@ -37,11 +37,11 @@ function Header() {
               Register
             </Button>
           </Link>
-          <Link to="/profile" className="header__links">
+          {/* <Link to="/profile" className="header__links">
             <Button style={{ padding: "2px 8px" }}>
               <Avatar></Avatar>
             </Button>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>

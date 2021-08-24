@@ -31,14 +31,26 @@
   }
   
   .register__container--right {
-     padding: 30px;
+     padding: 10px;
   }
   .register__container--right > form {
     padding: 20px;
     display: flex;
     flex-direction: column;
   }
-  .register__container--right > form > input {
+
+  .ownerDetails{
+    border: 1px solid gray;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  .dogDetails{
+    border: 1px solid gray;
+    padding: 15px;
+    border-radius: 10px;
+  }
+  .ownerDetails .dogDetails, input {
     width: 350px;
     height: 50px;
     font-size: 20px;
@@ -50,8 +62,11 @@
   .register__container--right > form > h3 {
     padding: 10px 0;
   }
-  
-  .register__container--right > form > button {
+  .register__container--right > form  h4{
+    padding: 5px;
+    color: gray;
+  }
+  .dogDetails > button {
     width: 350px;
     height: 50px;
     font-size: large;

@@ -13,7 +13,9 @@ function About() {
                 </div>
                 <div className="about__top--right">
                     <h3>About us</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus facilis delectus incidunt, cum sapiente quam pariatur eum. Doloribus, corrupti quod. Molestiae commodi officiis ex odio natus in iusto dolorum totam!</p>
+                    <p>Our excellent and hard working team are here for you. They work day and night
+                        to make our service best of the best. We are based on Auckland city. Our service is currently available
+                        in New Zealand and we are planning to expand our service worldwide very soon!</p>
                 </div>
             </div>
             <div className="about__bottom">
