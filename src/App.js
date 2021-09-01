@@ -37,7 +37,6 @@ function App() {
               <Register />
             </Route>
           </Switch>
-          
         </div>
 
       </Router>

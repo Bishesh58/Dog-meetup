@@ -8,8 +8,8 @@ import Mapbox from "./Mapbox";
 function Home() {
   return (
     <div className="home">
-      <Banner />
-      {/* <Mapbox /> */}
+      {/* <Banner /> */}
+      <Mapbox />
       <CarasoulComp />
       <CustomerReview />
     </div>
