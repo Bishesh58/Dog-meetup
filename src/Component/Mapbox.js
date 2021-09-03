@@ -12,8 +12,8 @@ function Mapbox() {
   const [currentPlaceID, setCurrentPlaceID] = useState(null);
   const [newEvent, setNewEvent] = useState(null);
   const [viewport, setViewport] = useState({
-    width: "80vw",
-    height: "50vh",
+    width: "100vw",
+    height: "100vh",
     latitude: -36.848461,
     longitude: 174.763336,
     zoom: 13,
@@ -114,7 +114,17 @@ function Mapbox() {
             onClose={() => setNewEvent(null)}
             anchor="left"
           >
-            New Pop up
+            new pop up
+            {/* <div className="newEvent">
+              <form action="">
+                <label>Title</label>
+                <input>Enter a title</input>
+                <label>Title</label>
+                <input>Enter a title</input>
+                <label>Title</label>
+                <input>Enter a title</input>
+              </form>
+            </div> */}
           </Popup>
         )}
       </ReactMapGL>

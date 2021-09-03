@@ -2,10 +2,12 @@ import logo from "../img/logo.png";
 import "./Header.css";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import { useSelector } from "react-redux";
 import { Avatar } from "@material-ui/core";
-import IconButton from "@material-ui/core/IconButton";
 
 function Header() {
+  const auth = useSelector((state) => state.auth);
+
   return (
     <div className="header">
       <div className="header__container">
@@ -24,24 +26,29 @@ function Header() {
             <Button>Contact</Button>
           </Link>
 
-          <Link to="/login" className="header__links">
-            <Button>Login</Button>
-          </Link>
+          {auth.userInfo ? (
+            <Link to="/profile" className="header__links">
+              <Button style={{ padding: "2px 8px" }}>
+                <Avatar></Avatar>
+              </Button>
+            </Link>
+          ) : (
+            <>
+              <Link to="/login" className="header__links">
+                <Button>Login</Button>
+              </Link>
 
-          <Link to="/register" className="header__links">
-            <Button
-              variant="contained"
-              disableElevation
-              style={{ backgroundColor: "#5577d2", color: "#FFFFFF" }}
-            >
-              Register
-            </Button>
-          </Link>
-          {/* <Link to="/profile" className="header__links">
-            <Button style={{ padding: "2px 8px" }}>
-              <Avatar></Avatar>
-            </Button>
-          </Link> */}
+              <Link to="/register" className="header__links">
+                <Button
+                  variant="contained"
+                  disableElevation
+                  style={{ backgroundColor: "#5577d2", color: "#FFFFFF" }}
+                >
+                  Register
+                </Button>
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </div>
