@@ -1,12 +1,21 @@
 import logo from "../img/logo.png";
 import "./Header.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Avatar } from "@material-ui/core";
+import {logout} from '../redux/authSlice'
 
 function Header() {
   const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const handleLogout = ()=>{
+    dispatch(logout());
+    history.push("/");
+
+  }
 
   return (
     <div className="header">
@@ -27,11 +36,18 @@ function Header() {
           </Link>
 
           {auth.userInfo ? (
+            <>
+            <Button
+            onClick={handleLogout}
+            >Logout</Button>
             <Link to="/profile" className="header__links">
-              <Button style={{ padding: "2px 8px" }}>
+              <Button style={{ padding: "2px 8px" }}
+              >
                 <Avatar></Avatar>
               </Button>
             </Link>
+            
+             </>
           ) : (
             <>
               <Link to="/login" className="header__links">

@@ -3,7 +3,10 @@ import { createSlice } from "@reduxjs/toolkit";
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
-    userInfo: null,
+    userInfo: {
+      email: "bisheshsunam@gmail.com",
+      password: "bisheshsunam"
+    },
     isLoading: false,
     error: false,
   },
