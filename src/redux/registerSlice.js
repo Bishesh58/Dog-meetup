@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const registerSlice = createSlice({
   name: "register",
   initialState: {
-    userInfo: null,
+    newUser: null,
     isLoading: false,
     error: false,
   },
@@ -14,7 +14,7 @@ export const registerSlice = createSlice({
     },
     registerSuccess: (state, action) => {
         state.isLoading = false;
-        state.userInfo = action.payload;
+        state.newUser = action.payload;
     },
       registerError: (state) => {
         state.error = true;

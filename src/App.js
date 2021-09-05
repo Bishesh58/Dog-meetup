@@ -8,6 +8,7 @@ import Register from "./Component/Register";
 import Footer from "./Component/Footer";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Profile from "./Component/Profile";
+import DogProfile from "./Component/DogProfile";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/contact" component={Contact} exact />
             <Route path="/login" component={Login} exact />
             <Route path="/profile" component={Profile} exact />
+            <Route path="/dogs" component={DogProfile} exact />
             <Route path="/register" component={Register} exact />
           </Switch>
         </div>

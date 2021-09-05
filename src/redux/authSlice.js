@@ -4,8 +4,8 @@ export const authSlice = createSlice({
   name: "auth",
   initialState: {
     userInfo: {
-      email: "bisheshsunam@gmail.com",
-      password: "bisheshsunam"
+      email: "bishesh",
+      password: "bishesh"
     },
     isLoading: false,
     error: false,

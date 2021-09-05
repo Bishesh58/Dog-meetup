@@ -4,6 +4,8 @@ import "./Login.css";
 import imgLogin from "../img/imgLogin.jpeg";
 import { login } from "../redux/apiCalls";
 import { useHistory } from "react-router-dom";
+import {CircularProgress} from '@material-ui/core';
+
 
 
 function Login() {
@@ -49,7 +51,9 @@ function Login() {
               onChange={(e) => setPassword(e.target.value)}
             />
 
-            <button>Sign in</button>
+            <button >
+              { auth.isLoading ? <CircularProgress size="30px"/>: "Sign In"}
+            </button>
             <p>
               Forget password? <span className="forgetpw">Reset Now</span>
             </p>

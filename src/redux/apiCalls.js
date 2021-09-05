@@ -22,6 +22,7 @@ export const register = async (user, dispatch, history) => {
     const res = await axios.post("http://localhost:5000/api/users/register", user);
     dispatch(registerSuccess(res.data));
     history.push("/login");
+    console.log(res.data);
   } catch (error) {
     dispatch(registerError());
   }
