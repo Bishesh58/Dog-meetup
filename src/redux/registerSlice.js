@@ -6,6 +6,7 @@ export const registerSlice = createSlice({
     newUser: null,
     isLoading: false,
     error: false,
+    errorMessage : null,
   },
 
   reducers: {
@@ -15,10 +16,12 @@ export const registerSlice = createSlice({
     registerSuccess: (state, action) => {
         state.isLoading = false;
         state.newUser = action.payload;
+        state.error = false;
     },
-      registerError: (state) => {
+      registerError: (state, action) => {
         state.error = true;
         state.isLoading = false;
+        state.errorMessage = action.payload;
       },
   },
 });

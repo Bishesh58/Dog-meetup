@@ -6,13 +6,14 @@ import { register } from "../redux/apiCalls";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { CircularProgress } from "@material-ui/core";
+import { configureStore } from "@reduxjs/toolkit";
 
 function Register() {
   const history = useHistory();
   const dispatch = useDispatch();
   const newUser = useSelector((state) => state.register);
   const getAddress = (result, lat, lng, text) => {
-    //console.log(result);
+    setAddress(result);
   };
   //local state
   const [username, setUsername] = useState(" ");
@@ -20,8 +21,7 @@ function Register() {
   const [lname, setLname] = useState(" ");
   const [email, setEmail] = useState(" ");
   const [password, setPassword] = useState(" ");
-  const [passwordConfirm, setPasswordConfirm] = useState(" ");
-
+  const [confirmPassword, setConfirmPassword] = useState(" ");
   const [address, setAddress] = useState(" ");
 
   const [dogname, setDogname] = useState(" ");
@@ -29,24 +29,34 @@ function Register() {
   const [dogcolor, setDogcolor] = useState(" ");
   const [dogweight, setDogweight] = useState(" ");
 
+  const password2 = useRef();
   const handleSubmit = (e) => {
     e.preventDefault();
-    register(
-      {
-        username,
-        fname,
-        lname,
-        email,
-        password,
-        address,
-        dogname,
-        dogbreed,
-        dogcolor,
-        dogweight,
-      },
-      dispatch,
-      history
-    );
+    if (
+      typeof `input["password"]` !== "undefined" &&
+      typeof `input["confirmPassword"]` !== "undefined"
+    ) {
+      if (`input["password"]` != `input["confirmPassword"]`) {
+        password2.current.setCustomValidity("Passwords didn't match!");
+      }
+    } else {
+      register(
+        {
+          username,
+          fname,
+          lname,
+          email,
+          password,
+          address,
+          dogname,
+          dogbreed,
+          dogcolor,
+          dogweight,
+        },
+        dispatch,
+        history
+      );
+    }
   };
   return (
     <div className="register">
@@ -61,33 +71,43 @@ function Register() {
               <h4>Dog owner details</h4>
               <input
                 placeholder="Username"
+                required
                 type="fname"
                 onChange={(e) => setUsername(e.target.value)}
               />
               <input
                 placeholder="First Name"
                 type="fname"
+                required
                 onChange={(e) => setFname(e.target.value)}
               />
               <input
                 placeholder="Last Name"
                 type="lname"
+                required
                 onChange={(e) => setLname(e.target.value)}
               />
               <input
                 placeholder="Email"
                 type="email"
+                required
                 onChange={(e) => setEmail(e.target.value)}
               />
               <input
                 placeholder="Password"
                 type="password"
+                name="password"
+                required
+                minLength="5"
                 onChange={(e) => setPassword(e.target.value)}
               />
               <input
                 placeholder="Confirm Password"
                 type="password"
-                onChange={(e) => setPasswordConfirm(e.target.value)}
+                required
+                ref={password2}
+                name="confirmPassword"
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </div>
 
@@ -96,6 +116,7 @@ function Register() {
               <input
                 placeholder="Dog name"
                 type="dogname"
+                required
                 onChange={(e) => setDogname(e.target.value)}
               />
               <input
@@ -121,12 +142,25 @@ function Register() {
                 country="nz"
                 resetSearch={false}
               />
-              <button>
-              { newUser.isLoading ? <CircularProgress size="30px"/>: "Sign up"}
+              <button type="submit">
+                {newUser.isLoading ? (
+                  <CircularProgress size="30px" />
+                ) : (
+                  "Sign up"
+                )}
               </button>
             </div>
           </form>
-          <span>{newUser.error? "error": ""}</span>
+          {newUser.error && (
+            <span style={{ paddingLeft: "15px", color: "orange" }}>
+              Something went wrong, Try again!
+            </span>
+          )}
+          {newUser._id && (
+            <span style={{ paddingLeft: "15px", color: "green" }}>
+              You have successfully registered! You can login now..
+            </span>
+          )}
         </div>
       </div>
     </div>

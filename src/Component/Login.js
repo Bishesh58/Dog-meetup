@@ -1,20 +1,18 @@
-import React, {useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./Login.css";
 import imgLogin from "../img/imgLogin.jpeg";
 import { login } from "../redux/apiCalls";
 import { useHistory } from "react-router-dom";
-import {CircularProgress} from '@material-ui/core';
-
-
+import { CircularProgress } from "@material-ui/core";
 
 function Login() {
   const [email, setEmail] = useState(" ");
   const [password, setPassword] = useState(" ");
   const auth = useSelector((state) => state.auth);
-  
+
   const dispatch = useDispatch();
- const history = useHistory()
+  const history = useHistory();
 
   //ref for input
   const eml = useRef();
@@ -51,13 +49,18 @@ function Login() {
               onChange={(e) => setPassword(e.target.value)}
             />
 
-            <button >
-              { auth.isLoading ? <CircularProgress size="30px"/>: "Sign In"}
+            <button>
+              {auth.isLoading ? <CircularProgress size="30px" /> : "Sign In"}
             </button>
             <p>
               Forget password? <span className="forgetpw">Reset Now</span>
             </p>
           </form>
+          {auth.error && (
+            <span style={{ paddingLeft: "15px", color: "orange" }}>
+              Wrong username or password!
+            </span>
+          )}
         </div>
       </div>
     </div>
