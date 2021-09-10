@@ -2,11 +2,15 @@ import React, { useEffect } from "react";
 import "./Mapbox.css";
 import { useState } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
+import 'mapbox-gl/dist/mapbox-gl.css';
 import RoomIcon from "@material-ui/icons/Room";
 import { Avatar } from "@material-ui/core";
 import axios from "axios";
+import 'mapbox-gl/dist/mapbox-gl.css';
+
 
 function Mapbox() {
+
   const [events, setEvents] = useState([]);
   const [address, setAddress] = useState([]);
   const [currentPlaceID, setCurrentPlaceID] = useState(null);
@@ -22,7 +26,7 @@ function Mapbox() {
   useEffect(() => {
     const getEvents = async () => {
       try {
-        const res = await axios.get("/events");
+        const res = await axios.get("/api/events");
         setEvents(res.data);
       } catch (error) {
         console.log(error);

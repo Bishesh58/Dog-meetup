@@ -109,6 +109,14 @@ function Register() {
                 name="confirmPassword"
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
+              <label className="lblAddress">Address</label>
+
+              <MapboxAutocomplete
+                publicKey={process.env.REACT_APP_MAPBOX}
+                onSuggestionSelect={getAddress}
+                country="nz"
+                resetSearch={false}
+              />
             </div>
 
             <div className="dogDetails">
@@ -134,14 +142,7 @@ function Register() {
                 type="dogcolor"
                 onChange={(e) => setDogcolor(e.target.value)}
               />
-              <label className="lblAddress">Address</label>
 
-              <MapboxAutocomplete
-                publicKey={process.env.REACT_APP_MAPBOX}
-                onSuggestionSelect={getAddress}
-                country="nz"
-                resetSearch={false}
-              />
               <button type="submit">
                 {newUser.isLoading ? (
                   <CircularProgress size="30px" />

@@ -45,7 +45,7 @@ function Login() {
               type="password"
               ref={pw}
               required
-              minLength="6"
+              minLength="5"
               onChange={(e) => setPassword(e.target.value)}
             />
 
