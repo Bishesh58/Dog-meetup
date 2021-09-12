@@ -29,16 +29,11 @@ function Register() {
   const [dogcolor, setDogcolor] = useState(" ");
   const [dogweight, setDogweight] = useState(" ");
 
-  const password2 = useRef();
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      typeof `input["password"]` !== "undefined" &&
-      typeof `input["confirmPassword"]` !== "undefined"
-    ) {
-      if (`input["password"]` != `input["confirmPassword"]`) {
-        password2.current.setCustomValidity("Passwords didn't match!");
-      }
+    if (password !== confirmPassword){
+        alert("Passwords don't match");
     } else {
       register(
         {
@@ -105,7 +100,6 @@ function Register() {
                 placeholder="Confirm Password"
                 type="password"
                 required
-                ref={password2}
                 name="confirmPassword"
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />

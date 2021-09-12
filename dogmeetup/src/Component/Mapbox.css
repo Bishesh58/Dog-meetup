@@ -1,5 +1,25 @@
+.mapbox {
+    flex: 0.7;
+    height: 100%;
+    width: 100%;
+    margin-top: 5px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    border-radius: 10px;
+    background-color: #ffff;
+}
+.popup{
+    box-shadow: 0 2px 8px 0 rgba(31, 38, 135, 0.37);
+    border-radius: 5px;
+    background-color: #ffff;
+}
+.mapbox__eventCard {
+    width: 200px;
+}
+
 .dogName {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    
 }

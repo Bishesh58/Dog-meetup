@@ -39,7 +39,6 @@ function Login() {
               required
               onChange={(e) => setEmail(e.target.value)}
             />
-
             <input
               placeholder="Password"
               type="password"
@@ -48,7 +47,6 @@ function Login() {
               minLength="5"
               onChange={(e) => setPassword(e.target.value)}
             />
-
             <button>
               {auth.isLoading ? <CircularProgress size="30px" /> : "Sign In"}
             </button>

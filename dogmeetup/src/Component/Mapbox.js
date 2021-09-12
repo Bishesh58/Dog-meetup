@@ -2,22 +2,20 @@ import React, { useEffect } from "react";
 import "./Mapbox.css";
 import { useState } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
-import 'mapbox-gl/dist/mapbox-gl.css';
+import "mapbox-gl/dist/mapbox-gl.css";
 import RoomIcon from "@material-ui/icons/Room";
-import { Avatar } from "@material-ui/core";
+import { Avatar, Button } from "@material-ui/core";
 import axios from "axios";
-import 'mapbox-gl/dist/mapbox-gl.css';
-
+import "mapbox-gl/dist/mapbox-gl.css";
 
 function Mapbox() {
-
   const [events, setEvents] = useState([]);
   const [address, setAddress] = useState([]);
   const [currentPlaceID, setCurrentPlaceID] = useState(null);
   const [newEvent, setNewEvent] = useState(null);
   const [viewport, setViewport] = useState({
-    width: "100vw",
-    height: "100vh",
+    width: "100%",
+    height: "100%",
     latitude: -36.848461,
     longitude: 174.763336,
     zoom: 13,
@@ -71,7 +69,7 @@ function Mapbox() {
             <Marker
               latitude={ev.lat}
               longitude={ev.long}
-              offsetLeft={-20}
+              offsetLeft={-30}
               offsetTop={-10}
             >
               <div>
@@ -93,17 +91,27 @@ function Mapbox() {
                 closeOnClick={false}
                 onClose={() => setCurrentPlaceID(null)}
                 anchor="left"
+                className="popup"
               >
-                <div key={i} className="eventCard">
+                <div key={i} className="mapbox__eventCard">
                   <div className="dogName">
-                    <Avatar />
-                    <p>{ev.username}</p>
+                    <Avatar src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/smartest-dog-breeds-1553287693.jpg?crop=0.673xw:1.00xh;0.167xw,0&resize=640:*" />
+                    <p style={{marginLeft:"-40px"}}>{ev.username}</p>
                   </div>
                   <p>{ev.title}</p>
                   {ev.activities.map((el, index) => {
-                    return <li key={index}>{el}</li>;
+                    return <li style={{fontSize:"small", padding:"5px 0px"}} key={index}>{el}</li>;
                   })}
-                  <button>Going</button> 3
+                  <Button
+                    style={{
+                      backgroundColor: "#5577d2",
+                      color: "#FFFFFF",
+                      textTransform: "capitalize",
+                    }}
+                  >
+                    Going
+                  </Button>{" "}
+                  3
                 </div>
               </Popup>
             )}
