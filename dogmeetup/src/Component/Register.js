@@ -107,9 +107,11 @@ function Register() {
 
               <MapboxAutocomplete
                 publicKey={process.env.REACT_APP_MAPBOX}
+                inputClass='form-control search'
                 onSuggestionSelect={getAddress}
                 country="nz"
                 resetSearch={false}
+                
               />
             </div>
 

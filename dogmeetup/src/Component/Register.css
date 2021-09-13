@@ -113,6 +113,7 @@
     cursor: pointer;
     padding-left:5px;
     padding-right: 5px;
+    background-color: white;
   }
    
   .react-mapbox-ac-suggestion:hover {

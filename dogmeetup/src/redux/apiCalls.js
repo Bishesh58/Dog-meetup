@@ -29,5 +29,6 @@ export const register = async (user, dispatch, history) => {
     
   } catch (error) {
     dispatch(registerError(error.message));
+    console.log(error);
   }
 };
