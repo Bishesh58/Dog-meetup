@@ -1,5 +1,5 @@
 .home {
-    height: 90vh;
+    min-height: 90vh;
     max-width: 1280px;
     margin: 0 auto; 
 }
