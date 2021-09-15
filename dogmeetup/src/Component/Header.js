@@ -1,13 +1,13 @@
-import logo from "../img/logo.png";
-import "./Header.css";
-import { Link, useHistory } from "react-router-dom";
-import Button from "@material-ui/core/Button";
-import { useDispatch, useSelector } from "react-redux";
-import { Avatar } from "@material-ui/core";
-import { logout } from "../redux/authSlice";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import { useState } from "react";
+import logo from '../img/logo.png';
+import './Header.css';
+import { Link, useHistory } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+import { useDispatch, useSelector } from 'react-redux';
+import { Avatar } from '@material-ui/core';
+import { logout } from '../redux/authSlice';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import { useState } from 'react';
 
 function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -15,18 +15,18 @@ function Header() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const handleOwnerProfile=()=>{
+  const handleOwnerProfile = () => {
     setAnchorEl(null);
-    history.push("/profile");
-  }
-  const handleDogProfile=()=>{
+    history.push('/profile');
+  };
+  const handleDogProfile = () => {
     setAnchorEl(null);
-    history.push("/dogs");
-  }
+    history.push('/dogs');
+  };
   const handleLogout = () => {
     dispatch(logout());
     setAnchorEl(null);
-    history.push("/");
+    history.push('/');
   };
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -41,7 +41,9 @@ function Header() {
       <div className="header__container">
         <div className="header__container--left">
           <img src={logo} alt="" />
-          <h3>Dog Meetup</h3>
+          <Link to="/" className="header__links">
+            <h3>Dog Meetup</h3>
+          </Link>
         </div>
         <div className="header__container--right">
           <Link to="/" className="header__links">
@@ -60,7 +62,7 @@ function Header() {
                 onClick={handleClick}
                 aria-controls="simple-menu"
                 aria-haspopup="true"
-                style={{ padding: "2px 8px" }}
+                style={{ padding: '2px 8px' }}
               >
                 <Avatar></Avatar>
               </Button>
@@ -75,8 +77,7 @@ function Header() {
                 <MenuItem onClick={handleDogProfile}>My dogs</MenuItem>
                 <MenuItem onClick={handleLogout}>Logout</MenuItem>
               </Menu>
-              <Link to="/profile" className="header__links">
-              </Link>
+              <Link to="/profile" className="header__links"></Link>
             </>
           ) : (
             <>
@@ -88,7 +89,7 @@ function Header() {
                 <Button
                   variant="contained"
                   disableElevation
-                  style={{ backgroundColor: "#5577d2", color: "#FFFFFF" }}
+                  style={{ backgroundColor: '#5577d2', color: '#FFFFFF' }}
                 >
                   Register
                 </Button>
