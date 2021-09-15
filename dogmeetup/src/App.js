@@ -26,8 +26,8 @@ function App() {
             <Route path="/register" component={Register} exact />
           </Switch>
         </div>
+        <Footer />
       </Router>
-      <Footer />
     </div>
   );
 }
