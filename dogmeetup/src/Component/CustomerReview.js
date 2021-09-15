@@ -1,12 +1,12 @@
-import React from "react";
-import ReviewCard from "./ReviewCard";
-import "./CustomerReview.css";
+import React from 'react';
+import ReviewCard from './ReviewCard';
+import './CustomerReview.css';
 
 function CustomerReview() {
   return (
     <div className="customerReview">
       <div className="customerReview__title">
-        <h4>What our customer has to say </h4>
+        <h4>What our Customers are saying</h4>
       </div>
       <div className="customerReview__cards">
         <ReviewCard
@@ -24,7 +24,7 @@ function CustomerReview() {
           title="We trained our dog with our neighbour dog"
           description="I meet new friend for my dog. He loves to play with other dogs and
           this service helped to achieve that. Thank you!"
-          color = "#74b9ff"
+          color="#74b9ff"
         />
         <ReviewCard
           imgURL="https://p.kindpng.com/picc/s/160-1600378_transparent-happy-person-png-happy-man-face-png.png"

@@ -1,19 +1,23 @@
-.customerReview{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    
+.customerReview {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .customerReview__title {
-    font-size: 24px;
-    padding: 16px 0;
+  margin: 1rem 0;
+  padding: 16px 0;
 }
 
-.customerReview__cards{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-   
+.customerReview__title > h4 {
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.customerReview__cards {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
 }
