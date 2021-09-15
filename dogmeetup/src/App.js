@@ -1,14 +1,14 @@
-import "./App.css";
-import Header from "./Component/Header";
-import Home from "./Component/Home";
-import About from "./Component/About";
-import Contact from "./Component/Contact";
-import Login from "./Component/Login";
-import Register from "./Component/Register";
-import Footer from "./Component/Footer";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Profile from "./Component/Profile";
-import DogProfile from "./Component/DogProfile";
+import './App.css';
+import Header from './Component/Header';
+import Home from './Component/Home';
+import About from './Component/About';
+import Contact from './Component/Contact';
+import Login from './Component/Login';
+import Register from './Component/Register';
+import Footer from './Component/Footer';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Profile from './Component/Profile';
+import DogProfile from './Component/DogProfile';
 
 function App() {
   return (
