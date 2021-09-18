@@ -32,24 +32,21 @@
 }
 
 .login__container--right {
-    padding: 30px;
+  padding: 30px;
 }
 .login__container--right > form {
   padding: 20px;
   display: flex;
   flex-direction: column;
 }
-.login__container--right > form > input {
-  width: 350px;
-  height: 50px;
-  font-size: 20px;
-  padding-left: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
+.login__container--right > form .TextField {
+  margin-bottom: 0.75rem;
 }
+
 .login__container--right > form > h3 {
   padding: 10px 0;
 }
+
 .login__container--right > form > button {
   width: 350px;
   height: 50px;
@@ -67,11 +64,11 @@
   height: 100%;
 }
 
-.forgetpw{
-    color: #0177b7;
-    cursor: pointer;
+.forgetpw {
+  color: #0177b7;
+  cursor: pointer;
 }
 
-.login__container--right > form > p{
-    margin-top: 20px;
+.login__container--right > form > p {
+  margin-top: 20px;
 }
