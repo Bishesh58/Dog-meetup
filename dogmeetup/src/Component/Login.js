@@ -69,9 +69,9 @@ function Login() {
             />
             <TextField
               className='TextField'
-              label='Password'
               error={passwordError}
               helperText={passwordErrorMessage}
+              label='Password'
               minLength='5'
               onChange={e => setPassword(e.target.value)}
               ref={pw}
