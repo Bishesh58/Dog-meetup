@@ -1,23 +1,23 @@
 .login {
+  align-items: center;
+  display: flex;
   height: 100%;
+  justify-content: center;
   min-height: 90vh;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
 }
 
 .login__container {
-  width: 850px;
-  height: 550px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  border-radius: 10px;
+  align-items: center;
+  backdrop-filter: blur(4px);
   background-color: #ffff;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  display: flex;
+  height: 550px;
+  justify-content: center;
+  width: 850px;
 }
 
 .login__container--left {
@@ -32,24 +32,22 @@
 }
 
 .login__container--right {
-    padding: 30px;
+  padding: 30px;
 }
 .login__container--right > form {
   padding: 20px;
   display: flex;
   flex-direction: column;
 }
-.login__container--right > form > input {
-  width: 350px;
-  height: 50px;
-  font-size: 20px;
-  padding-left: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
+.login__container--right > form .TextField {
+  margin-bottom: 0.75rem;
 }
+
 .login__container--right > form > h3 {
+  font-size: 1.25rem;
   padding: 10px 0;
 }
+
 .login__container--right > form > button {
   width: 350px;
   height: 50px;
@@ -67,11 +65,11 @@
   height: 100%;
 }
 
-.forgetpw{
-    color: #0177b7;
-    cursor: pointer;
+.forgetpw {
+  color: #0177b7;
+  cursor: pointer;
 }
 
-.login__container--right > form > p{
-    margin-top: 20px;
+.login__container--right > form > p {
+  margin-top: 20px;
 }
