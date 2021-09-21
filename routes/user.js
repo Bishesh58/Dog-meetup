@@ -12,19 +12,27 @@ router.post("/register", async (req, res) => {
     //create new user
     const newUser = new User({
       username: req.body.username,
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      gender: req.body.gender,
+      phone: req.body.phone,
+      address: req.body.address,
       email: req.body.email,
       password: hashedPassword,
-      address: req.body.address,
+      profilepic: req.body.profilepic,
     });
+
+    //create new dog
     newUser.dog.push({
       dogname: req.body.dogname,
       dogbreed: req.body.dogbreed,
       dogweight: req.body.dogweight,
       dogcolor: req.body.dogcolor,
+      dogpic: req.body.dogpic,
     });
     //save user
     const user = await newUser.save();
-    res.status(200).json(user.dog);
+    res.status(200).json("register success");
   } catch (error) {
     res.status(500).json(error);
   }
@@ -44,7 +52,8 @@ router.post("/login", async (req, res) => {
     );
     !validPassword && res.status(400).json("wrong username or password!");
     //send res
-    res.status(200).json({ _id: user._id, username: user.username });
+    const { _id, ...other } = user._doc;
+    res.status(200).json(_id);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -62,25 +71,59 @@ router.get("/:id", async (req, res) => {
 });
 
 //update user
-router.put("/:id", async (req, res) => {
-  if (req.body.userId === req.params.id) {
-    if (req.body.password) {
-      try {
-        const salt = await bcrypt.genSalt(10);
-        req.body.password = await bcrypt.hash(req.body.password, salt);
-      } catch (error) {
-        return res.status(500).json(error);
-      }
-    }
+router.patch("/:id", async (req, res) => {
+  const user = await User.findOne({ _id: req.params.id });
+  if (user) {
     try {
-      const user = await User.findByIdAndUpdate(
-        req.params.id,
-        {
-          $set: req.body,
-        },
-        { new: true }
+      const validPassword = await bcrypt.compare(
+        req.body.oldPassword,
+        user.password
       );
-      res.status(200).json("Account has been updated");
+      if (validPassword) {
+        if (req.body.newPassword) {
+          const salt = await bcrypt.genSalt(10);
+          req.body.newPassword = await bcrypt.hash(req.body.newPassword, salt);
+
+          const user = await User.findByIdAndUpdate(
+            req.params.id,
+            {
+              $set: {
+                username: req.body.username,
+                firstname: req.body.firstname,
+                lastname: req.body.lastname,
+                gender: req.body.gender,
+                phone: req.body.phone,
+                address: req.body.address,
+                email: req.body.email,
+                password: req.body.newPassword,
+                profilepic: req.body.profilepic,
+              },
+            },
+            { new: true }
+          );
+          res.send("accound updated successfully")
+        } else {
+          const user = await User.findByIdAndUpdate(
+            req.params.id,
+            {
+              $set: {
+                username: req.body.username,
+                firstname: req.body.firstname,
+                lastname: req.body.lastname,
+                gender: req.body.gender,
+                phone: req.body.phone,
+                address: req.body.address,
+                email: req.body.email,
+                profilepic: req.body.profilepic,
+              },
+            },
+            { new: true }
+          );
+          res.send("accound updated successfully")
+        }
+      } else {
+        res.send("wrong password!");
+      }
     } catch (error) {
       return res.status(500).json(error);
     }
@@ -91,7 +134,11 @@ router.put("/:id", async (req, res) => {
 
 //delete user
 router.delete("/:id", async (req, res) => {
-  if (req.body.userId === req.params.id) {
+  const user = await User.findOne({ _id: req.params.id });
+  const validPassword = await bcrypt.compare(req.body.password, user.password);
+  !validPassword && res.status(400).json("wrong password!");
+
+  if (validPassword) {
     try {
       await User.findByIdAndDelete(req.params.id);
       res.status(200).json("Account has been deleted successfully");
@@ -101,6 +148,17 @@ router.delete("/:id", async (req, res) => {
   } else {
     return res.status(403).json("You can only delete your account");
   }
+
+  // if (req.body.userId === req.params.id) {
+  //   try {
+  //     await User.findByIdAndDelete(req.params.id);
+  //     res.status(200).json("Account has been deleted successfully");
+  //   } catch (error) {
+  //     return res.status(500).json(error);
+  //   }
+  // } else {
+  //   return res.status(403).json("You can only delete your account");
+  // }
 });
 
 //get all dogs

@@ -19,6 +19,10 @@ const DogSchema = new mongoose.Schema(
       type: String,
       min: 2,
     },
+    dogpic: {
+      type: String,
+      default: null,
+    },
   },
   {
     timestamps: true,
@@ -34,9 +38,34 @@ const UserSchema = new mongoose.Schema(
       max: 20,
       unique: true,
     },
+    firstname: {
+      type: String,
+      require: true,
+      min: 3,
+      max: 20,
+    },
+    lastname: {
+      type: String,
+      require: true,
+      min: 3,
+      max: 20,
+    },
+    gender: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    phone: {
+      type: Number,
+      maxlength: 10,
+    },
+    address: {
+      type: String,
+    },
     email: {
       type: String,
       require: true,
+      lowercase: true,
       max: 50,
       unique: true,
     },
@@ -44,9 +73,11 @@ const UserSchema = new mongoose.Schema(
       type: String,
       requre: true,
       min: 4,
+      require: true,
     },
-    address: {
+    profilepic: {
       type: String,
+      default: null,
     },
     dog: [DogSchema],
   },
@@ -56,6 +87,3 @@ const UserSchema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model("User", UserSchema);
-
-
-
