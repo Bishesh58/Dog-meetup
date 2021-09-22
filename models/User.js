@@ -13,7 +13,7 @@ const DogSchema = new mongoose.Schema(
     },
     dogweight: {
       type: Number,
-      max: 120,
+      max: 130,
     },
     dogcolor: {
       type: String,

@@ -8,6 +8,10 @@ import IconButton from "@material-ui/core/IconButton";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import { updateUser } from "../redux/apiCalls";
 import axios from "axios";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormLabel from "@mui/material/FormLabel";
 
 function EditProfile({ setIsEditing }) {
   //get id from auth state
@@ -73,7 +77,7 @@ function EditProfile({ setIsEditing }) {
   };
 
   //uploading image to cloudinary
-  const handleSelect = async(e) => {
+  const handleSelect = async (e) => {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", "profile_image");
@@ -88,12 +92,14 @@ function EditProfile({ setIsEditing }) {
       console.log(error);
     }
   };
-  
+
   useEffect(() => {
-    if(file){
-      document.getElementById("upload").addEventListener("click", handleSelect());
+    if (file) {
+      document
+        .getElementById("upload")
+        .addEventListener("click", handleSelect());
     }
-  }, [file])
+  }, [file]);
 
   return (
     <div className="profile">
@@ -106,7 +112,9 @@ function EditProfile({ setIsEditing }) {
           <div>
             <input type="file" onChange={(e) => setFile(e.target.files[0])} />
             <span>file must be less than 10MB</span>
-            <button type="submit" id="upload" onClick={handleSelect}>upload</button>
+            <button type="submit" id="upload" onClick={handleSelect}>
+              upload
+            </button>
           </div>
           <h3>Bishesh Sunam</h3>
           <p>bishesh.sunam@gmail.com</p>
@@ -137,12 +145,27 @@ function EditProfile({ setIsEditing }) {
             type="lastname"
             onChange={(e) => setlastname(e.target.value)}
           />
-          <label> Gender:</label>
-          <input
-            placeholder={userDetails?.gender}
-            type="gender"
+          <FormLabel component="legend">Gender</FormLabel>
+          <RadioGroup
+            row
+            aria-label="gender"
+            name="radio-buttons-group"
+            defaultValue={userDetails?.gender}
             onChange={(e) => setGender(e.target.value)}
-          />
+            className="RadioGroup"
+          >
+            <FormControlLabel value="male" control={<Radio />} label="Male" />
+            <FormControlLabel
+              value="female"
+              control={<Radio />}
+              label="Female"
+            />
+            <FormControlLabel
+              value="other"
+              control={<Radio required={true} />}
+              label="Other"
+            />
+          </RadioGroup>
           <label> Phone:</label>
           <input
             placeholder={userDetails?.phone}
