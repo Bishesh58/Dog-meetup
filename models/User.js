@@ -79,7 +79,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: null,
     },
-    dog: [DogSchema],
+    dogs: [DogSchema],
   },
   {
     timestamps: true,

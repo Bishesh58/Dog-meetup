@@ -23,7 +23,7 @@ router.post("/register", async (req, res) => {
     });
 
     //create new dog
-    newUser.dog.push({
+    newUser.dogs.push({
       dogname: req.body.dogname,
       dogbreed: req.body.dogbreed,
       dogweight: req.body.dogweight,
@@ -101,7 +101,7 @@ router.patch("/:id", async (req, res) => {
             },
             { new: true }
           );
-          res.send("accound updated successfully")
+          res.send("accound updated successfully");
         } else {
           const user = await User.findByIdAndUpdate(
             req.params.id,
@@ -119,7 +119,7 @@ router.patch("/:id", async (req, res) => {
             },
             { new: true }
           );
-          res.send("accound updated successfully")
+          res.send("accound updated successfully");
         }
       } else {
         res.send("wrong password!");
@@ -165,8 +165,8 @@ router.delete("/:id", async (req, res) => {
 router.get("/:id/dogs", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
-    const { dog } = user._doc;
-    res.status(200).json(dog);
+    const { dogs } = user._doc;
+    res.status(200).json(dogs);
   } catch (error) {
     return res.status(500).json(error);
   }
@@ -175,11 +175,12 @@ router.get("/:id/dogs", async (req, res) => {
 //add new dog
 router.post("/:id/dogs", async (req, res) => {
   try {
+    console.log(req.body.id);
     const user = await User.findOneAndUpdate(
       { _id: req.body.id },
       {
         $push: {
-          dog: {
+          dogs: {
             dogname: req.body.dogname,
             dogbreed: req.body.dogbreed,
             dogweight: req.body.dogweight,
@@ -196,16 +197,17 @@ router.post("/:id/dogs", async (req, res) => {
 });
 
 //update dog (req dog id)
-router.put("/dogs/:id", async (req, res) => {
+router.patch("/dogs/:id", async (req, res) => {
   try {
     const user = await User.findOneAndUpdate(
-      { "dog._id": req.body.id },
+      { "dogs._id": req.body.dogId },
       {
         $set: {
-          "dog.$.dogname": req.body.dogname,
-          "dog.$.dogbreed": req.body.dogbreed,
-          "dog.$.dogweight": req.body.dogweight,
-          "dog.$.dogcolor": req.body.dogcolor,
+          "dogs.$.dogname": req.body.dogname,
+          "dogs.$.dogbreed": req.body.dogbreed,
+          "dogs.$.dogweight": req.body.dogweight,
+          "dogs.$.dogcolor": req.body.dogcolor,
+          "dogs.$.dogpic": req.body.dogpic,
         },
       },
       { new: true }
@@ -223,7 +225,7 @@ router.delete("/dogs/:id", async (req, res) => {
       { _id: req.body.userId },
       {
         $pull: {
-          dog: { _id: req.body.dogId },
+          dogs: { _id: req.body.dogId },
         },
       },
       { new: true }

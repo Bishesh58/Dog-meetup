@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState } from "react";
 import "./Register.css";
 import imgRegister from "../img/imgRegister.jpeg";
 import MapboxAutocomplete from "react-mapbox-autocomplete";
@@ -6,7 +6,6 @@ import { register } from "../redux/apiCalls";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { CircularProgress } from "@material-ui/core";
-import { configureStore } from "@reduxjs/toolkit";
 import TextField from "@material-ui/core/TextField";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -111,15 +110,6 @@ function Register() {
         dispatch,
         history
       );
-    }
-  };
-
-  const verifyEmail = () => {
-    let validEmail = validator.isEmail(email);
-    if (validEmail) {
-      setEmailErrorMessage("");
-    } else {
-      setEmailErrorMessage("Not a valid email!");
     }
   };
 

@@ -1,9 +1,19 @@
 import { Button, TextField } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import EventCard from "./EventCard";
 import "./SearchBar.css";
+import { fetchUser } from "../redux/apiCalls";
 
 function SearchBar() {
+
+  const dispatch = useDispatch();
+
+  const auth = useSelector((state) => state.auth);
+  useEffect(() => {
+    fetchUser(dispatch, auth.userInfo);
+  }, []);
+
   return (
     <div className="searchBar">
       <div className="searchBar__top">

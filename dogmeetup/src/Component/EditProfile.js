@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./EditProfile.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import { Avatar, CircularProgress } from "@material-ui/core";
+import { Avatar, Button, CircularProgress } from "@material-ui/core";
 import MapboxAutocomplete from "react-mapbox-autocomplete";
 import IconButton from "@material-ui/core/IconButton";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
@@ -110,11 +110,11 @@ function EditProfile({ setIsEditing }) {
         ></Avatar>
         <div className="profile__title">
           <div>
-            <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+            <Button variant="contained" component="label">
+             Change image  <input hidden type="file" onChange={(e) => setFile(e.target.files[0])} />
+            </Button>
             <span>file must be less than 10MB</span>
-            <button type="submit" id="upload" onClick={handleSelect}>
-              upload
-            </button>
+            <button type="submit" id="upload" onClick={handleSelect}></button>
           </div>
           <h3>Bishesh Sunam</h3>
           <p>bishesh.sunam@gmail.com</p>
