@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Carousel from 'react-elastic-carousel';
 import Item from '../carasoul/Item';
-import { contains } from 'dom-helpers';
+
 
 function CarasoulComp() {
   const breakPoints = [
@@ -11,7 +11,7 @@ function CarasoulComp() {
     { width: 1200, itemsToShow: 4 },
   ];
 
-  const [items, setItems] = useState([
+  const [items, ] = useState([
     {
       id: 1,
       title: '1',

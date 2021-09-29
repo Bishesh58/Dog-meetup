@@ -1,0 +1,9 @@
+.dogCard {
+  margin: 8px;
+  min-width: 300px;
+}
+
+/* TextField */
+.dogCard .TextField {
+  margin-bottom: 0.75rem;
+}

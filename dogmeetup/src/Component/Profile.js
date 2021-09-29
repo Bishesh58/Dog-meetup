@@ -20,10 +20,6 @@ function Profile() {
   const history = useHistory();
 
   const auth = useSelector((state) => state.auth);
-  useEffect(() => {
-    fetchUser(dispatch, auth.userInfo);
-  }, []);
-
   const { userDetails } = useSelector((state) => state.user);
 
   const [isEditing, setIsEditing] = useState(false);

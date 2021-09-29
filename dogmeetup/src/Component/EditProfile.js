@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./EditProfile.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import { Avatar, CircularProgress } from "@material-ui/core";
+import { Avatar, Button, CircularProgress } from "@material-ui/core";
 import MapboxAutocomplete from "react-mapbox-autocomplete";
 import IconButton from "@material-ui/core/IconButton";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import { updateUser } from "../redux/apiCalls";
+import axios from "axios";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormLabel from "@mui/material/FormLabel";
 
 function EditProfile({ setIsEditing }) {
   //get id from auth state
@@ -31,10 +36,10 @@ function EditProfile({ setIsEditing }) {
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [profilepic, setProfilepic] = useState(userDetails?.profilepic);
+  const [file, setFile] = useState(null);
 
   const handleUpdateSubmit = (e) => {
     e.preventDefault();
-
     if (newPassword !== confirmNewPassword) {
       alert("Confirm Passwords don't match");
     } else {
@@ -70,6 +75,32 @@ function EditProfile({ setIsEditing }) {
     e.preventDefault();
     setIsEditing(false);
   };
+
+  //uploading image to cloudinary
+  const handleSelect = async (e) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "profile_image");
+    formData.append("cloud_name", "dygxlj9hh");
+    try {
+      const res = await axios.post(
+        "https://api.cloudinary.com/v1_1/dygxlj9hh/image/upload",
+        formData
+      );
+      setProfilepic(res.data.url);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (file) {
+      document
+        .getElementById("upload")
+        .addEventListener("click", handleSelect());
+    }
+  }, [file]);
+
   return (
     <div className="profile">
       <div className="profile__left">
@@ -78,9 +109,13 @@ function EditProfile({ setIsEditing }) {
           style={{ height: "150px", width: "150px" }}
         ></Avatar>
         <div className="profile__title">
-          <IconButton>
-            <AddAPhotoIcon />
-          </IconButton>
+          <div>
+            <Button variant="contained" component="label">
+             Change image  <input hidden type="file" onChange={(e) => setFile(e.target.files[0])} />
+            </Button>
+            <span>file must be less than 10MB</span>
+            <button type="submit" id="upload" onClick={handleSelect}></button>
+          </div>
           <h3>Bishesh Sunam</h3>
           <p>bishesh.sunam@gmail.com</p>
         </div>
@@ -110,12 +145,27 @@ function EditProfile({ setIsEditing }) {
             type="lastname"
             onChange={(e) => setlastname(e.target.value)}
           />
-          <label> Gender:</label>
-          <input
-            placeholder={userDetails?.gender}
-            type="gender"
+          <FormLabel component="legend">Gender</FormLabel>
+          <RadioGroup
+            row
+            aria-label="gender"
+            name="radio-buttons-group"
+            defaultValue={userDetails?.gender}
             onChange={(e) => setGender(e.target.value)}
-          />
+            className="RadioGroup"
+          >
+            <FormControlLabel value="male" control={<Radio />} label="Male" />
+            <FormControlLabel
+              value="female"
+              control={<Radio />}
+              label="Female"
+            />
+            <FormControlLabel
+              value="other"
+              control={<Radio required={true} />}
+              label="Other"
+            />
+          </RadioGroup>
           <label> Phone:</label>
           <input
             placeholder={userDetails?.phone}
