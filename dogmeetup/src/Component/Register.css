@@ -12,7 +12,10 @@
 .register .TextField {
   margin-bottom: 0.75rem;
 }
-
+.register  .RadioGroup {
+  margin-bottom: 0.75rem;
+  color: gray;
+}
 .register__container {
   -webkit-backdrop-filter: blur(4px);
   align-items: center;

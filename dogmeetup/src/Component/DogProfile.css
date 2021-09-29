@@ -1,9 +1,25 @@
 .dogProfile {
-    min-height: 90vh;
-    display: flex;
-    padding: 20px;
-    width: 850px;
-    padding-top: 30px;
-   margin-left: auto;
-   margin-right: auto;
+  min-height: 90vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 30px;
+  flex-wrap: wrap;
+}
+
+.dogProfile__top {
+  text-align: end;
+}
+
+.dogProfile__bottom {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.TextField {
+  margin-bottom: 0.75rem !important;
+}
+
+.MuiDialogTitle-root + .css-ypiqx9-MuiDialogContent-root {
+  padding-top: 8px !important;
 }
