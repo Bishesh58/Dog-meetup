@@ -4,20 +4,16 @@ const EventSchema = new mongoose.Schema(
   {
     username: {
       type: String,
-      require: true,
-      min: 3,
-      max: 20,
-      unique: true,
+    },
+    profilepic: {
+      type: String,
     },
     title: {
       type: String,
       require: true,
       min: 3,
     },
-    dogname: {
-      type: String,
-      min: 4,
-    },
+
     dogtype: {
       type: String,
     },
@@ -27,6 +23,12 @@ const EventSchema = new mongoose.Schema(
     activities: {
       type: Array,
     },
+    startDate: {
+      type: String,
+    },
+    endDate: {
+      type: String,
+    },
     lat: {
       type: Number,
       require: true,
@@ -34,6 +36,12 @@ const EventSchema = new mongoose.Schema(
     long: {
       type: Number,
       require: true,
+    },
+    address: {
+      type: Array,
+    },
+    going: {
+      type:Number,
     },
   },
   {

@@ -7,7 +7,6 @@ router.post("/", async(req, res)=>{
     try {
       const savedEvent = await newEvent.save()
       res.status(200).json(savedEvent);
-
         
     } catch (error) {
         res.status(500).json(error)
@@ -23,5 +22,19 @@ router.get("/", async(req, res)=>{
         res.send(500).json(error)
     }
 })
+
+//update posts
+router.patch("/:id", async(req, res)=>{
+    const newEvent = new Events(req.body)
+    try {
+      const savedEvent = await newEvent.save()
+      res.status(200).json(savedEvent);
+        
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
+
+//update posts
 
 module.exports = router;
