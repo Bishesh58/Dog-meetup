@@ -10,6 +10,18 @@ import {
   updateUserError,
 } from "./userSlice";
 
+import {
+  fetchEventsStart,
+  fetchEventsSuccess,
+  fetchEventsError,
+  addNewEventStart,
+  addNewEventSuccess,
+  addNewEventError,
+  updateEventsStart,
+  updateEventsSuccess,
+  updateEventsError,
+} from "./eventsSlice";
+
 //login
 export const login = async (user, dispatch, history) => {
   dispatch(loginStart());
@@ -60,5 +72,45 @@ export const updateUser = async (user, dispatch, history, id) => {
   } catch (error) {
     dispatch(updateUserError(error.message));
     console.log(error);
+  }
+};
+
+//get events
+export const fetchEvents = async (dispatch) => {
+  dispatch(fetchEventsStart());
+  try {
+    const res = await axios.get(`/api/events/`);
+    dispatch(fetchEventsSuccess(res.data));
+  } catch (error) {
+    dispatch(fetchEventsError(error.message));
+    console.log(error);
+  }
+};
+
+//add new events
+export const addNewEvent = async (events, dispatch) => {
+  dispatch(addNewEventStart());
+  try {
+    const res = await axios.post(`/api/events/`, events);
+    dispatch(addNewEventSuccess(res.data));
+    const res1 = await axios.get(`/api/events/`);
+    dispatch(fetchEventsSuccess(res1.data));
+  } catch (error) {
+    dispatch(addNewEventError(error.message));
+    console.log(error.response.data);
+  }
+};
+
+//update events
+export const updateEvent = async (events, dispatch) => {
+  dispatch(updateEventsStart());
+  try {
+    const res = await axios.patch(`/api/events/`, events);
+    dispatch(updateEventsSuccess(res.data));
+    const res1 = await axios.get(`/api/events/`);
+    dispatch(fetchEventsSuccess(res1.data));
+  } catch (error) {
+    dispatch(updateEventsError(error.message));
+    console.log(error.response.data);
   }
 };
