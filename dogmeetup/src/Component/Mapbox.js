@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import "./Mapbox.css";
 import { useState } from "react";
-import ReactMapGL, { Marker, Popup } from "react-map-gl";
+import ReactMapGL, { Marker, Popup, Layer, Source } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import RoomIcon from "@material-ui/icons/Room";
 import { Avatar, Button, IconButton, TextField } from "@material-ui/core";
+import HomeIcon from '@material-ui/icons/Home';
 import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Close";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -35,12 +36,14 @@ function Mapbox() {
   const [endDate, setEndDate] = useState(new Date());
   const [count, setCount] = useState(0);
   const [join, setJoin] = useState(false);
+  const [points, setPoint] = useState([]);
+  const [steps, setSteps] = useState([]);
 
   const [viewport, setViewport] = useState({
     width: "100%",
     height: "100%",
-    latitude: -36.848461,
-    longitude: 174.763336,
+    latitude: userDetails ? userDetails.lat : -36.848461,
+    longitude: userDetails ? userDetails.long : 174.763336,
     zoom: 13,
   });
 
@@ -60,6 +63,7 @@ function Mapbox() {
       latitude: lat,
       longitude: long,
     });
+    getRoutes(lat, long);
   };
 
   const handleNewEvent = (e) => {
@@ -100,12 +104,11 @@ function Mapbox() {
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${newEvent.long},${newEvent.lat}.json?access_token=${process.env.REACT_APP_MAPBOX}`
       )
         .then((res) => {
-         return res.json();
+          return res.json();
         })
-        .then((data) =>{
-          setAddress(data.features[0].place_name)
-        } );
-        
+        .then((data) => {
+          setAddress(data.features[0].place_name);
+        });
     } catch (error) {
       console.log(error);
     }
@@ -140,6 +143,51 @@ function Mapbox() {
     }
   };
 
+  const geojson = {
+    type: "Feature",
+    properties: {},
+    geometry: {
+      type: "LineString",
+      coordinates: points,
+    },
+  };
+  const layer = {
+    id: "points",
+    type: "line",
+    source: {
+      type: "geojson",
+      data: geojson,
+    },
+    layout: {
+      "line-join": "round",
+      "line-cap": "round",
+    },
+    paint: {
+      "line-color": "#3887be",
+      "line-width": 5,
+      "line-opacity": 0.75,
+    },
+  };
+
+  const getRoutes = async (lat, long) => {
+    const res =
+      await axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/
+    ${userDetails.long},${userDetails.lat};${long},${lat}
+    ?steps=true&geometries=geojson&access_token=pk.eyJ1IjoiYmlzaGVzaHN1bmFtIiwiYSI6ImNrcm40Z3g1bjgwbTYyb3BhaTYzazRkaHMifQ.sKBOMc0QI4adcKRF3KN7-w`);
+    setPoint(res.data.routes[0].geometry.coordinates);
+
+    setSteps(res.data.routes[0].legs[0].steps);
+
+    const instructions = document.getElementById("instructions");
+    let tripInstructions = "";
+    for (const step of steps) {
+      tripInstructions += `<li>${step.maneuver.instruction}</li>`;
+    }
+    instructions.innerHTML = `<p><strong>Trip duration: ${Math.floor(
+      res.data.routes[0].duration / 60
+    )} min 🚗 </strong></p><ol>${tripInstructions}</ol>`;
+  };
+
   return (
     <div className="mapbox">
       <ReactMapGL
@@ -150,6 +198,9 @@ function Mapbox() {
         mapStyle="mapbox://styles/bisheshsunam/cksfztp1p0xsk17luuy3w7udz"
         onDblClick={handleNewEvent}
       >
+         <Marker latitude={userDetails.lat} longitude={userDetails.long} offsetLeft={-10} offsetTop={-10}>
+        <div>Home<HomeIcon></HomeIcon></div>
+        </Marker>
         {eventsDetails?.map((ev, i) => (
           <>
             <Marker
@@ -170,6 +221,7 @@ function Mapbox() {
                 ></RoomIcon>
               </div>
             </Marker>
+
             {ev._id === currentPlaceID && (
               <Popup
                 latitude={ev.lat}
@@ -177,9 +229,13 @@ function Mapbox() {
                 closeButton={true}
                 closeOnClick={false}
                 onClose={() => setCurrentPlaceID(null)}
-                anchor="left"
+                anchor="top"
                 className="popup"
               >
+                <Source id="my-data" type="geojson" data={geojson}>
+                  <Layer {...layer} />
+                </Source>
+                
                 <div key={i} className="mapbox__eventCard">
                   <div className="dogName">
                     <Avatar src={ev?.profilepic} />
@@ -215,7 +271,9 @@ function Mapbox() {
                     Join
                   </Button>
                   {join && ev.going + 1}
+                  
                 </div>
+                
               </Popup>
             )}
           </>
@@ -319,6 +377,10 @@ function Mapbox() {
             </div>
           </Popup>
         )}
+        {currentPlaceID && (
+           <div id="instructions"></div>
+        )}
+       
       </ReactMapGL>
     </div>
   );

@@ -37,3 +37,16 @@
     margin-top: 8px;
     display: flex;
 }
+
+#instructions {
+    position: absolute;
+    z-index: 9999;
+    margin: 10px;
+    top: 0;
+    right: 0;
+    padding: 20px;
+    width: 40%;
+    background-color: #fff;
+    overflow-y: scroll;
+    font-family: sans-serif;
+  }
