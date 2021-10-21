@@ -5,7 +5,7 @@ import ReactMapGL, { Marker, Popup, Layer, Source } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import RoomIcon from "@material-ui/icons/Room";
 import { Avatar, Button, IconButton, TextField } from "@material-ui/core";
-import HomeIcon from '@material-ui/icons/Home';
+import HomeIcon from "@material-ui/icons/Home";
 import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Close";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -15,7 +15,7 @@ import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { format } from "timeago.js";
 import moment from "moment";
-import { addNewEvent, fetchEvents } from "../redux/apiCalls";
+import { addNewEvent, fetchEvents, updateEvent } from "../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
 
 function Mapbox() {
@@ -24,7 +24,7 @@ function Mapbox() {
   const { eventsDetails } = useSelector((state) => state.events);
 
   const [events, setEvents] = useState([]);
-  const [address, setAddress] = useState([]);
+  const [address, setAddress] = useState(" ");
   const [currentPlaceID, setCurrentPlaceID] = useState(null);
   const [newEvent, setNewEvent] = useState(null);
   const [title, setTitle] = useState(" ");
@@ -34,7 +34,7 @@ function Mapbox() {
   const [activityList, setActivityList] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const [count, setCount] = useState(0);
+  const [going, setCount] = useState(0);
   const [join, setJoin] = useState(false);
   const [points, setPoint] = useState([]);
   const [steps, setSteps] = useState([]);
@@ -130,17 +130,14 @@ function Mapbox() {
     setActivityList([]);
   };
 
-  const addToGoing = async (e) => {
-    e.preventDefault();
-    const going = 1;
-    try {
-      const res = await axios.patch(`/api/events/`, going);
-      setEvents([...events, newEvent]);
-      //setNewEvent(null)
-      //setActivityList([])
-    } catch (error) {
-      console.log(error.response.data);
-    }
+  const addToGoing = async (id, count) => {
+    setJoin(!join);
+
+    const payload = {
+      going: join ? count + 1 : count - 1,
+      status: join,
+    };
+    updateEvent(payload, dispatch, id);
   };
 
   const geojson = {
@@ -175,7 +172,7 @@ function Mapbox() {
     ${userDetails.long},${userDetails.lat};${long},${lat}
     ?steps=true&geometries=geojson&access_token=pk.eyJ1IjoiYmlzaGVzaHN1bmFtIiwiYSI6ImNrcm40Z3g1bjgwbTYyb3BhaTYzazRkaHMifQ.sKBOMc0QI4adcKRF3KN7-w`);
     setPoint(res.data.routes[0].geometry.coordinates);
-
+    //console.log(res.data.routes[0])
     setSteps(res.data.routes[0].legs[0].steps);
 
     const instructions = document.getElementById("instructions");
@@ -198,9 +195,19 @@ function Mapbox() {
         mapStyle="mapbox://styles/bisheshsunam/cksfztp1p0xsk17luuy3w7udz"
         onDblClick={handleNewEvent}
       >
-         <Marker latitude={userDetails.lat} longitude={userDetails.long} offsetLeft={-10} offsetTop={-10}>
-        <div>Home<HomeIcon></HomeIcon></div>
-        </Marker>
+        {userDetails && (
+          <Marker
+            latitude={userDetails?.lat}
+            longitude={userDetails?.long}
+            offsetLeft={-10}
+            offsetTop={-10}
+          >
+            <div>
+              Home<HomeIcon></HomeIcon>
+            </div>
+          </Marker>
+        )}
+
         {eventsDetails?.map((ev, i) => (
           <>
             <Marker
@@ -232,10 +239,10 @@ function Mapbox() {
                 anchor="top"
                 className="popup"
               >
-                <Source id="my-data" type="geojson" data={geojson}>
+                <Source type="geojson" data={geojson}>
                   <Layer {...layer} />
                 </Source>
-                
+
                 <div key={i} className="mapbox__eventCard">
                   <div className="dogName">
                     <Avatar src={ev?.profilepic} />
@@ -261,19 +268,26 @@ function Mapbox() {
                   <p>{ev.address}</p>
                   <span>{format(ev.createdAt)}</span>
                   <Button
-                    style={{
-                      backgroundColor: "#5577d2",
-                      color: "#FFFFFF",
-                      textTransform: "capitalize",
-                    }}
-                    onClick={addToGoing}
+                    style={
+                      join
+                        ? {
+                            backgroundColor: "#5577d2",
+                            color: "#FFFFFF",
+                            textTransform: "capitalize",
+                          }
+                        : {
+                            backgroundColor: "green",
+                            color: "#FFFFFF",
+                            textTransform: "capitalize",
+                          }
+                    }
+                    onClick={() => addToGoing(ev._id, ev.going)}
                   >
-                    Join
+                    {ev.status && "Joined"}
+                    {!ev.status && "Join"}
                   </Button>
-                  {join && ev.going + 1}
-                  
+                  {ev.going}
                 </div>
-                
               </Popup>
             )}
           </>
@@ -377,10 +391,7 @@ function Mapbox() {
             </div>
           </Popup>
         )}
-        {currentPlaceID && (
-           <div id="instructions"></div>
-        )}
-       
+        {currentPlaceID && <div id="instructions"></div>}
       </ReactMapGL>
     </div>
   );

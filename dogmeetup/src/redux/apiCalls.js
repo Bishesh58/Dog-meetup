@@ -102,10 +102,10 @@ export const addNewEvent = async (events, dispatch) => {
 };
 
 //update events
-export const updateEvent = async (events, dispatch) => {
+export const updateEvent = async (events, dispatch, id) => {
   dispatch(updateEventsStart());
   try {
-    const res = await axios.patch(`/api/events/`, events);
+    const res = await axios.patch(`/api/events/${id}`, events);
     dispatch(updateEventsSuccess(res.data));
     const res1 = await axios.get(`/api/events/`);
     dispatch(fetchEventsSuccess(res1.data));

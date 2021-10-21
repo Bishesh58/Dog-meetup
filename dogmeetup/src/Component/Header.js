@@ -24,6 +24,10 @@ function Header() {
     setAnchorEl(null);
     history.push("/dogs");
   };
+  const handleEventHistory =()=>{
+    setAnchorEl(null);
+    history.push("/eventsHistory");
+  }
   const handleLogout = () => {
     dispatch(logout());
     setAnchorEl(null);
@@ -76,6 +80,8 @@ function Header() {
               >
                 <MenuItem onClick={handleOwnerProfile}>Profile</MenuItem>
                 <MenuItem onClick={handleDogProfile}>My dogs</MenuItem>
+                <MenuItem onClick={handleEventHistory}>Event history</MenuItem>
+
                 <MenuItem onClick={handleLogout}>Logout</MenuItem>
               </Menu>
               <Link to="/profile" className="header__links"></Link>

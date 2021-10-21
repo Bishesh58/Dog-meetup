@@ -9,6 +9,7 @@ import Footer from './Component/Footer';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Profile from './Component/Profile';
 import DogProfile from './Component/DogProfile';
+import EventHistory from './Component/EventHistory';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/login" component={Login} exact />
             <Route path="/profile" component={Profile} exact />
             <Route path="/dogs" component={DogProfile} exact />
+            <Route path="/eventsHistory" component={EventHistory} exact />
             <Route path="/register" component={Register} exact />
           </Switch>
         </div>
