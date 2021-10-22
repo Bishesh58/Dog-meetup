@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./EventHistoryCard.css";
 import axios from "axios";
+import MapboxAutocomplete from "react-mapbox-autocomplete";
 import { Button, IconButton } from "@material-ui/core";
 import TextField from "@mui/material/TextField";
 import AddIcon from "@material-ui/icons/Add";
@@ -25,19 +26,25 @@ import { fetchEvents, updateEvent } from "../redux/apiCalls";
 
 function EventHistoryCard({ ev, i }) {
   const dispatch = useDispatch();
+  const { userDetails } = useSelector((state) => state.user);
+  const { eventsDetails } = useSelector((state) => state.events);
 
-  const [address, setAddress] = useState("");
-  const [title, setTitle] = useState(" ");
+  const getAddress = (result, lat, lng, text) => {
+    setAddress(result);
+    setLat(lat);
+    setLong(lng);
+  };
+
+  const [address, setAddress] = useState(ev?.address);
+  const [title, setTitle] = useState(ev?.title);
   const [activities, setActivities] = useState("");
-  const [dogtype, setDogType] = useState("");
-  const [dogweight, setDogweight] = useState();
+  const [dogtype, setDogType] = useState(ev?.dogtype);
+  const [dogweight, setDogweight] = useState(ev?.dogweight);
   const [activityList, setActivityList] = useState(ev?.activities);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const [going, setCount] = useState(0);
-  const [join, setJoin] = useState(false);
-  const [points, setPoint] = useState([]);
-  const [steps, setSteps] = useState([]);
+  const [lat, setLat] = useState(ev?.lat);
+  const [long, setLong] = useState(ev?.long);
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -79,29 +86,30 @@ function EventHistoryCard({ ev, i }) {
     e.preventDefault();
     setOpen(false);
     await axios.delete(`/api/events/${ev._id}`);
-    
     fetchEvents(dispatch);
   };
 
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
-    // if (dogname === "") {
-    //   setDogNameError(true);
-    //   setDogNameErrorMessage("Please fill in this field.");
-    // } else if (dogweight > 120 || dogweight < 5) {
-    //   setDogWeightError(true);
-    //   setDogWeightErrorMessage("Dog weight must be betweent 5 to 130 kg");
-    // } else {
-    //   const payload = {
-           
-    
 
-    //   };
-    //   await axios.patch(`/api/events/${ev._id}`, payload);
-    //   setExpanded(!expanded);
-    //   fetchEvents(dispatch);
-    // }
+    const payload = {
+      username: userDetails.username,
+      profilepic: userDetails.profilepic,
+      title,
+      dogtype,
+      dogweight,
+      startDate,
+      endDate,
+      activities: activityList,
+      lat,
+      long,
+      address,
+    };
+    updateEvent(payload, dispatch, ev._id);
+    setExpanded(!expanded);
+    fetchEvents(dispatch);
   };
+
   //adding activity list
   const addActivities = (e) => {
     e.preventDefault();
@@ -124,10 +132,10 @@ function EventHistoryCard({ ev, i }) {
       <Card className={classes.root}>
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            Title: {ev.title}
+            Title: {ev?.title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Dog Breed: {ev.dogtype}
+            Dog Breed: {ev?.dogtype}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             Dog Weight: {ev.dogweight} kg
@@ -258,6 +266,15 @@ function EventHistoryCard({ ev, i }) {
                   />
                 </div>
               </MuiPickersUtilsProvider>
+              <Typography className="lblAddress">{ev.address}</Typography>
+
+              <MapboxAutocomplete
+                publicKey={process.env.REACT_APP_MAPBOX}
+                inputClass="form-control search"
+                onSuggestionSelect={getAddress}
+                country="nz"
+                resetSearch={false}
+              />
               <Button type="submit" fullWidth onClick={handleUpdateSubmit}>
                 Update
               </Button>
