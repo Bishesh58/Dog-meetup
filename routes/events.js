@@ -61,4 +61,44 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+//filter search event
+router.get("/filter/search", async (req, res) => {
+  // const { searchQuery, tags } = req.query;
+  // // if (searchQuery == "none" && tags === ",,") {
+  // //   res.send("you have selected nothing..");
+  // // } else {
+  // // }
+  // let regex = new RegExp(searchQuery, "i");
+  // const events = await Events.find({
+  //   $and: [
+  //     {
+  //       $or: [
+  //         {
+  //           title: regex,
+  //         },
+  //         {
+  //           dogtype: regex,
+  //         },
+  //         {
+  //           dogweight: regex,
+  //         },
+  //         {
+  //           address: regex,
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // });
+  // res.status(200).json(events);
+  // try {
+  //   const text = new RegExp(searchQuery, "i");
+  //   const events = await Events.find({
+  //     $or: [{ text }, { tags: { $in: tags.split(",") } }],
+  //   });
+  //   res.status(200).json(events);
+  // } catch (error) {
+  //   res.send(500).json({ message: error.message });
+  // }
+});
+
 module.exports = router;

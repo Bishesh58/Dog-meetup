@@ -114,3 +114,4 @@ export const updateEvent = async (events, dispatch, id) => {
     console.log(error.response.data);
   }
 };
+

@@ -10,7 +10,7 @@ function EventHistory() {
 
   return (
     <div className="eventHistory">
-      {eventsDetails.map((ev, i) =>
+      {eventsDetails?.map((ev, i) =>
         ev.username === userDetails.username ? (
           <EventHistoryCard ev={ev} i={i} />
         ) : null
