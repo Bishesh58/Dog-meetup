@@ -57,7 +57,7 @@ function SearchBar() {
           item.dogtype.toLowerCase().toString().includes(inputText) ||
           item.dogweight.toString().includes(inputText) ||
           item.startDate.toLowerCase().toString().includes(inputText) ||
-          item.endDate.toLowerCase().toString().includes(inputText) 
+          item.endDate.toLowerCase().toString().includes(inputText)
         );
       });
 
@@ -211,7 +211,11 @@ function SearchBar() {
           <EventCard Ev={Ev} />
         ))}
 
-        {data?.length === 0 && <span>No records found to be displayed</span>}
+        {data?.length === 0 && (
+          <span style={{ paddingLeft: "15px" }}>
+            No records found to be displayed..
+          </span>
+        )}
       </div>
     </div>
   );

@@ -26,7 +26,7 @@ function Register() {
   const [username, setUsername] = useState("");
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState("male");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -99,8 +99,8 @@ function Register() {
       register(
         {
           username,
-          fname,
-          lname,
+          firstname: fname,
+          lastname: lname,
           gender,
           phone,
           email,

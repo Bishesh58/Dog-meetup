@@ -52,6 +52,22 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
+//add going people
+router.put("/:id/going", async (req, res) => {
+  try {
+    const event = await Events.findById( req.params.id)
+    if(!event.going.includes(req.body.userId)){
+      await event.updateOne({ $push: { going: req.body.userId } });
+      res.status(200).json("You have joined");
+    } else {
+      await event.updateOne({ $pull: { going: req.body.userId } });
+      res.status(200).json("You are removed from going");
+    }
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
 //delete event
 router.delete("/:id", async (req, res) => {
   try {

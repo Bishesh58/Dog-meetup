@@ -34,7 +34,7 @@ function Mapbox() {
   const [activityList, setActivityList] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const [going, setCount] = useState(0);
+  const [going, setGoing] = useState([].length);
   const [join, setJoin] = useState(false);
   const [points, setPoint] = useState([]);
   const [steps, setSteps] = useState([]);
@@ -56,13 +56,24 @@ function Mapbox() {
     fetchEvents(dispatch);
   }, []);
 
-  const handleMarkerClick = (id, lat, long) => {
+  const handleMarkerClick = (ev) => {
+    const id = ev._id;
+    const lat = ev.lat;
+    const long = ev.long;
     setCurrentPlaceID(id);
     setViewport({
       ...viewport,
       latitude: lat,
       longitude: long,
     });
+    setGoing(ev.going.length);
+    {
+      ev?.going?.map((goingId) => {
+        if (goingId === userDetails._id) {
+          setJoin(true);
+        }
+      });
+    }
     getRoutes(lat, long);
   };
 
@@ -130,14 +141,14 @@ function Mapbox() {
     setActivityList([]);
   };
 
-  const addToGoing = async (id, count) => {
+  const addToGoing = async (ev) => {
     setJoin(!join);
-
-    const payload = {
-      going: join ? count + 1 : count - 1,
-      status: join,
-    };
-    updateEvent(payload, dispatch, id);
+    const id = ev._id;
+    try {
+      axios.put(`/api/events/${id}/going`, { userId: userDetails._id });
+    } catch (err) {}
+    setGoing(join ? going - 1 : going + 1);
+    setJoin(!join);
   };
 
   const geojson = {
@@ -182,7 +193,9 @@ function Mapbox() {
     }
     instructions.innerHTML = `<p><strong>Trip duration: ${Math.floor(
       res.data.routes[0].duration / 60
-    )} min 🚗 </strong></p><ol>${tripInstructions}</ol>`;
+    )} min 🚗  ${Math.floor(
+      res.data.routes[0].distance / 1000
+    )} km</strong></p><div class="instructions_list "><ol>${tripInstructions}</ol></div>`;
   };
 
   return (
@@ -224,7 +237,7 @@ function Mapbox() {
                     color: ev.username === "Bishesh" ? "#c56cf0" : "tomato",
                     cursor: "pointer",
                   }}
-                  onClick={() => handleMarkerClick(ev._id, ev.lat, ev.long)}
+                  onClick={() => handleMarkerClick(ev)}
                 ></RoomIcon>
               </div>
             </Marker>
@@ -246,19 +259,18 @@ function Mapbox() {
                 <div key={i} className="mapbox__eventCard">
                   <div className="dogName">
                     <Avatar src={ev?.profilepic} />
-                    <p style={{ marginLeft: "-40px" }}>{ev?.username}</p>
+                    <p style={{ marginLeft: "10px" }}>{ev?.username}</p>
                   </div>
                   <p>{ev?.title}</p>
                   {ev?.activities.map((el, index) => {
                     return (
-                      <li
-                        style={{ fontSize: "small", padding: "5px 0px" }}
-                        key={index}
-                      >
+                      <li style={{ padding: "5px 0px" }} key={index}>
                         {el}
                       </li>
                     );
                   })}
+                  <p>Dog breed: {ev?.dogtype}</p>
+                  <p>Dog weight: {ev?.dogweight} kg</p>
                   <p>
                     Start: {moment(ev.startDate).format("MMMM Do YYYY, h:mm a")}
                   </p>
@@ -266,27 +278,28 @@ function Mapbox() {
                     End: {moment(ev.endDate).format("MMMM Do YYYY, h:mm a")}
                   </p>
                   <p>{ev.address}</p>
-                  <span>{format(ev.createdAt)}</span>
-                  <Button
-                    style={
-                      join
-                        ? {
-                            backgroundColor: "#5577d2",
-                            color: "#FFFFFF",
-                            textTransform: "capitalize",
-                          }
-                        : {
-                            backgroundColor: "green",
-                            color: "#FFFFFF",
-                            textTransform: "capitalize",
-                          }
-                    }
-                    onClick={() => addToGoing(ev._id, ev.going)}
-                  >
-                    {ev.status && "Joined"}
-                    {!ev.status && "Join"}
-                  </Button>
-                  {ev.going}
+                  <span>created: {format(ev.createdAt)}</span>
+                  <p>
+                    <Button
+                      style={
+                        join
+                          ? {
+                              backgroundColor: "green",
+                              color: "#FFFFFF",
+                              textTransform: "capitalize",
+                            }
+                          : {
+                              backgroundColor: "#5577d2",
+                              color: "#FFFFFF",
+                              textTransform: "capitalize",
+                            }
+                      }
+                      onClick={() => addToGoing(ev)}
+                    >
+                      {join ? "Joined" : "Join"}
+                    </Button>{" "}
+                    {going}
+                  </p>
                 </div>
               </Popup>
             )}
@@ -398,23 +411,3 @@ function Mapbox() {
 }
 
 export default Mapbox;
-
-// useEffect(() => {
-//   const fetchAddress = async(lng, lat)=> {
-//     try {
-//       await fetch(
-//           `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${process.env.REACT_APP_MAPBOX}`
-//       )
-//         .then(res => {res.json()})
-//         .then(data => setAddress(data.features[0]))
-//         // .then(data =>setAddress(data.features[0]));
-
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-//   events.map((ev)=>{
-//     fetchAddress(ev.long, ev.lat);
-//   })
-
-// }, []);

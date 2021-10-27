@@ -1,52 +1,61 @@
 .mapbox {
-    flex: 0.7;
-    min-height: 90vh;
-    height: 100%;
-    width: 100%;
-    margin-top: 5px;
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(4px);
-    border-radius: 10px;
-    background-color: #ffff;
+  flex: 0.7;
+  min-height: 90vh;
+  height: 100%;
+  width: 100%;
+  margin-top: 5px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  border-radius: 10px;
+  background-color: #ffff;
 }
-.popup{
-    box-shadow: 0 2px 8px 0 rgba(31, 38, 135, 0.37);
-    border-radius: 5px;
-    background-color: #ffff;
+.popup {
+  box-shadow: 0 2px 8px 0 rgba(31, 38, 135, 0.37);
+  border-radius: 5px;
+  background-color: #ffff;
 }
 .mapbox__eventCard {
-    width: 200px;
+  font-size: 16px !important;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  padding: 8px;
+  width: 250px;
 }
-
+.mapbox__eventCard p {
+  padding-bottom: 5px;
+}
 .dogName {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .activityList {
-    max-height: 110px;
-    overflow: auto;
+  max-height: 110px;
+  overflow: auto;
 }
 
 .newEvent {
-    width: 500px;
+  width: 500px;
 }
 
 .DatePicker {
-    margin-top: 8px;
-    display: flex;
+  margin-top: 8px;
+  display: flex;
 }
 
 #instructions {
-    position: absolute;
-    z-index: 9999;
-    margin: 10px;
-    top: 0;
-    right: 0;
-    padding: 20px;
-    width: 40%;
-    background-color: #fff;
-    overflow-y: scroll;
-    font-family: sans-serif;
-  }
+  position: absolute;
+  z-index: 9999;
+  margin: 10px;
+  top: 0;
+  right: 0;
+  padding: 20px;
+  width: 40%;
+  background-color: #fff;
+  overflow-y: scroll;
+  font-family: sans-serif;
+}
+
+.instructions_list {
+  margin-left: 10px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}

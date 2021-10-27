@@ -41,12 +41,8 @@ const EventSchema = new mongoose.Schema(
       type: String,
     },
     going: {
-      type: Number,
-      default: 1,
-    },
-    status: {
-      type: Boolean,
-      default: false,
+      type: Array,
+      default: [],
     },
   },
   {

@@ -34,8 +34,10 @@ function EventCard({ Ev }) {
           Address: {Ev?.address}
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
-          Created by: {Ev?.username} {format(Ev.createdAt)}
+          Created by: {Ev?.username} <span style={{color: "silver", paddingLeft: "15px"}}> {format(Ev.createdAt)}</span>
+          
         </Typography>
+        
         <Typography variant="body2" color="textSecondary" component="p">
           Total people join: {Ev?.going}
         </Typography>
