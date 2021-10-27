@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./EventHistory.css";
 import { useDispatch, useSelector } from "react-redux";
 import EventHistoryCard from "./EventHistoryCard";
+import { fetchEvents } from "../redux/apiCalls";
 
 function EventHistory() {
   const dispatch = useDispatch();
   const { userDetails } = useSelector((state) => state.user);
   const { eventsDetails } = useSelector((state) => state.events);
+  
 
   return (
     <div className="eventHistory">

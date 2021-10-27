@@ -56,3 +56,10 @@
   padding-left: 0 !important;
   background-color: rgba(215, 241, 246, 0.982);
 }
+
+.delete_message {
+  background: #f1e5cc;
+  padding: 10px;
+  border-radius: 8px;
+}
+

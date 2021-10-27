@@ -24,11 +24,13 @@ import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { fetchEvents, updateEvent } from "../redux/apiCalls";
 
+
 function EventHistoryCard({ ev, i }) {
+   
   const dispatch = useDispatch();
   const { userDetails } = useSelector((state) => state.user);
   const { eventsDetails } = useSelector((state) => state.events);
-
+  
   const getAddress = (result, lat, lng, text) => {
     setAddress(result);
     setLat(lat);
@@ -86,7 +88,7 @@ function EventHistoryCard({ ev, i }) {
     e.preventDefault();
     setOpen(false);
     await axios.delete(`/api/events/${ev._id}`);
-    fetchEvents(dispatch);
+    
   };
 
   const handleUpdateSubmit = async (e) => {

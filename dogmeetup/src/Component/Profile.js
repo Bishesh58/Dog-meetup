@@ -120,16 +120,16 @@ function Profile() {
                         onChange={(e) => setPassword(e.target.value)}
                       />
                     </DialogContent>
-                    <DialogActions>
-                      <Button onClick={handleClose}>Cancel</Button>
-                      <Button onClick={handleDeleteSubmit}>Delete</Button>
+                    <DialogActions >
+                      <Button onClick={handleClose} >Cancel</Button>
+                      <Button onClick={handleDeleteSubmit} >Delete</Button>
                     </DialogActions>
                   </Dialog>
                 </div>
               ) : null}
               <br />
-              <div style={{ background: "#FFD580" }}>
-                Deleting account cannot be undone {userDetails?.username}! You
+              <div className="delete_message">
+                Deleting account cannot be undone <strong> {userDetails?.username}! </strong> <br/> You
                 should confirm your password to delete your account.
               </div>
             </form>

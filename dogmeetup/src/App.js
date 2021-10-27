@@ -7,9 +7,8 @@ import Login from './Component/Login';
 import Register from './Component/Register';
 import Footer from './Component/Footer';
 import Dogs from './Component/DogProfile'
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Profile from './Component/Profile';
-import DogProfile from './Component/DogProfile';
 import EventHistory from './Component/EventHistory';
 import { useSelector } from 'react-redux';
 

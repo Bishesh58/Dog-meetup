@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import EventCard from "./EventCard";
 import "./SearchBar.css";
-import { fetchUser, fetchEvents } from "../redux/apiCalls";
+import { fetchUser } from "../redux/apiCalls";
 import { TextField } from "@material-ui/core";
 import Button from "@mui/material/Button";
 import InputLabel from "@mui/material/InputLabel";
@@ -15,7 +15,6 @@ function SearchBar() {
   const dispatch = useDispatch();
 
   const auth = useSelector((state) => state.auth);
-  const { eventsDetails } = useSelector((state) => state?.events);
   useEffect(() => {
     fetchUser(dispatch, auth.userInfo);
   }, []);
