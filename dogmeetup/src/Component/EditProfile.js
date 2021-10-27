@@ -4,8 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { Avatar, Button, CircularProgress } from "@material-ui/core";
 import MapboxAutocomplete from "react-mapbox-autocomplete";
-import IconButton from "@material-ui/core/IconButton";
-import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import { updateUser } from "../redux/apiCalls";
 import axios from "axios";
 import Radio from "@mui/material/Radio";
@@ -110,18 +108,19 @@ function EditProfile({ setIsEditing }) {
         ></Avatar>
         <div className="profile__title">
           <div>
+            <br/>
             <Button variant="contained" component="label">
              Change image  <input hidden type="file" onChange={(e) => setFile(e.target.files[0])} />
             </Button>
+            <br/>
             <span>file must be less than 10MB</span>
+            <br/>
+            <br/>
             <button type="submit" id="upload" onClick={handleSelect}></button>
           </div>
           <h3>Bishesh Sunam</h3>
           <p>bishesh.sunam@gmail.com</p>
         </div>
-        <button type="submit" onClick={handleCancel}>
-          Cancel
-        </button>
       </div>
       <div className="profile__right">
         <form onSubmit={handleUpdateSubmit}>
@@ -209,6 +208,10 @@ function EditProfile({ setIsEditing }) {
           <button type="submit">
             {isLoading ? <CircularProgress size="30px" /> : "Update"}
           </button>
+            <br/>
+          <button type="submit" onClick={handleCancel}>
+          Cancel
+        </button>
         </form>
       </div>
     </div>

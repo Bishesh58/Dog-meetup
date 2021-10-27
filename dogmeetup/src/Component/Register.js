@@ -19,12 +19,14 @@ function Register() {
   const newUser = useSelector((state) => state.register);
   const getAddress = (result, lat, lng, text) => {
     setAddress(result);
+    setLat(lat);
+    setLong(lng);
   };
   //local state
   const [username, setUsername] = useState("");
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState("male");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,6 +36,8 @@ function Register() {
   const [dogbreed, setDogbreed] = useState("");
   const [dogcolor, setDogcolor] = useState("");
   const [dogweight, setDogweight] = useState("");
+  const [lat, setLat] = useState(0);
+  const [long, setLong] = useState(0);
 
   const [usernameError, setUsernameError] = useState(false);
   const [usernameErrorMessage, setUsernameErrorMessage] = useState("");
@@ -95,13 +99,15 @@ function Register() {
       register(
         {
           username,
-          fname,
-          lname,
+          firstname: fname,
+          lastname: lname,
           gender,
           phone,
           email,
           password,
           address,
+          lat,
+          long,
           dogname,
           dogbreed,
           dogcolor,

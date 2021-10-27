@@ -62,7 +62,7 @@ function DogProfile() {
   return (
     <div className="dogProfile">
       <div className="dogProfile__top">
-        <Button onClick={handleClickOpen}>Add new dog</Button>
+        <Button onClick={handleClickOpen} style={{background: "#67e6dc"}}>Add new dog</Button>
         <form>
           <Dialog open={open} onClose={handleClose}>
             <DialogTitle>Add New Dog</DialogTitle>

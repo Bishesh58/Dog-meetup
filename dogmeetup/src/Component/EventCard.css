@@ -6,7 +6,7 @@
     margin: 5px;
     height: auto;
     color: gray;
-    background-color: whitesmoke;
+    background-color: white;
     border: 1px solid rgb(205, 205, 209);
     border-radius: 5px;
    
@@ -18,5 +18,5 @@
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     border-radius: 5px;
-    background-color: whitesmoke;
+    background-color: ghostwhite;
 }
