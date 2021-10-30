@@ -12,6 +12,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const auth = useSelector((state) => state.auth);
+  const {newUser} = useSelector((state) => state.register);
 
   const [emailError, setEmailError] = useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
@@ -57,6 +58,19 @@ function Login() {
         </div>
         <div className="login__container--right">
           <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+            {newUser? (
+            <span
+              style={{
+                color: "green",
+                display: "block",
+                fontSize: "1rem",
+                marginBottom: "0.75rem",
+                textAlign: "center",
+              }}
+            >
+              You have successfully registered! You can login now..
+            </span>
+          ) : null}
             <h3>Sign in to your account</h3>
             <TextField
               className="TextField"
@@ -102,6 +116,8 @@ function Login() {
               Wrong username or password!
             </span>
           )}
+          
+          
         </div>
       </div>
     </div>

@@ -337,19 +337,6 @@ function Register() {
               Something went wrong, Try again!
             </span>
           )}
-          {newUser._id && (
-            <span
-              style={{
-                color: "green",
-                display: "block",
-                fontSize: "1rem",
-                marginBottom: "0.75rem",
-                textAlign: "center",
-              }}
-            >
-              You have successfully registered! You can login now..
-            </span>
-          )}
         </div>
       </div>
     </div>
