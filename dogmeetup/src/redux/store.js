@@ -3,6 +3,7 @@ import authReducer from "./authSlice";
 import registerReducer from "./registerSlice";
 import userReducer from "./userSlice";
 import eventsReducer from "./eventsSlice";
+import reviewReducer from "./reviewSlice";
 
 export default configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export default configureStore({
     register: registerReducer,
     user: userReducer,
     events: eventsReducer,
+    reviews: reviewReducer,
   },
 });

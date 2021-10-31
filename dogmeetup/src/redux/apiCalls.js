@@ -22,6 +22,15 @@ import {
   updateEventsError,
 } from "./eventsSlice";
 
+import {
+  fetchReviewStart,
+  fetchReviewSuccess,
+  fetchReviewError,
+  addNewReviewStart,
+  addNewReviewSuccess,
+  addNewReviewError,
+} from "./reviewSlice";
+
 //login
 export const login = async (user, dispatch, history) => {
   dispatch(loginStart());
@@ -115,3 +124,26 @@ export const updateEvent = async (events, dispatch, id) => {
   }
 };
 
+//get review
+export const fetchReview = async (dispatch) => {
+  dispatch(fetchReviewStart());
+  try {
+    const res = await axios.get(`/api/reviews/`);
+    dispatch(fetchReviewSuccess(res.data));
+  } catch (error) {
+    dispatch(fetchReviewError(error.message));
+    console.log(error);
+  }
+};
+
+//add new review
+export const addNewReview = async (review, dispatch) => {
+  dispatch(addNewReviewStart());
+  try {
+    const res = await axios.post(`/api/reviews/`, review);
+    dispatch(addNewReviewSuccess(res.data));
+  } catch (error) {
+    dispatch(addNewReviewError(error.message));
+    console.log(error.response.data);
+  }
+};

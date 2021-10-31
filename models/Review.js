@@ -26,6 +26,9 @@ const ReviewSchema = new mongoose.Schema(
       type: String,
       min: 4,
     },
+    profilepic: {
+      type: String,
+    },
   },
   {
     timestamps: true,
