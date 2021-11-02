@@ -39,7 +39,7 @@ function EventCard({ Ev }) {
         </Typography>
         
         <Typography variant="body2" color="textSecondary" component="p">
-          Total people join: {Ev?.going}
+          Total people join: {Ev?.going.length}
         </Typography>
       </CardContent>
     </div>
