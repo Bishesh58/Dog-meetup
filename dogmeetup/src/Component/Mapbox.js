@@ -15,7 +15,7 @@ import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { format } from "timeago.js";
 import moment from "moment";
-import { addNewEvent, fetchEvents, updateEvent } from "../redux/apiCalls";
+import { addNewEvent, fetchEvents } from "../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
 
 function Mapbox() {
@@ -23,7 +23,6 @@ function Mapbox() {
   const { userDetails } = useSelector((state) => state.user);
   const { eventsDetails } = useSelector((state) => state.events);
 
-  const [events, setEvents] = useState([]);
   const [address, setAddress] = useState(" ");
   const [currentPlaceID, setCurrentPlaceID] = useState(null);
   const [newEvent, setNewEvent] = useState(null);

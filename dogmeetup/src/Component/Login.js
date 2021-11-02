@@ -59,7 +59,7 @@ function Login() {
         <div className="login__container--right">
           <form noValidate autoComplete="off" onSubmit={handleSubmit}>
             {newUser? (
-            <span
+            <span id="heading_title"
               style={{
                 color: "green",
                 display: "block",

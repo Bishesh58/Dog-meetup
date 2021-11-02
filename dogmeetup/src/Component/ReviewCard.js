@@ -1,21 +1,25 @@
-import React from 'react';
-import './ReviewCard.css';
-import { Avatar } from '@material-ui/core';
+import React from "react";
+import "./ReviewCard.css";
+import { Avatar } from "@material-ui/core";
 
-function ReviewCard({ imgURL, fname, lname, title, description, color }) {
+function ReviewCard({ review, i}) {
+  
   return (
-    <div className="reviewCard">
-      <div className="reviewCard__top" style={{ backgroundColor: color }}></div>
+    <div key={i} className="reviewCard">
+      <div
+        className="reviewCard__top"
+        style={{ backgroundColor: "purple" }}
+      ></div>
       <div className="reviewCard__middle">
-        <Avatar style={{ height: '70px', width: '70px' }} src={imgURL}></Avatar>
+        <Avatar style={{ height: "70px", width: "70px" }} src={review.profilepic}></Avatar>
       </div>
       <div className="reviewCard__bottom">
         <div className="reviewCard__top--name">
-          <p>{fname}</p>
-          <p>{lname}</p>
+          <p>{review.fname}</p>
+          <p>{review.lname}</p>
         </div>
-        <h4>{title}</h4>
-        <p>{description}</p>
+        <h4>{review.title}</h4>
+        <p>{review.description}</p>
       </div>
     </div>
   );

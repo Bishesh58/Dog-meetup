@@ -1,12 +1,65 @@
 .profile {
   min-height: 90vh;
   display: flex;
+  flex-direction: column;
   padding: 20px;
   width: 850px;
   padding-top: 30px;
   margin-left: auto;
   margin-right: auto;
 }
+.profile_top {
+  display: flex;
+}
+.profile_bottom {
+  height: 500px;
+  background-image: url("../img/review.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.profile_bottom > h4 {
+  text-transform: uppercase;
+  text-align: center;
+  padding: 10px;
+  font-size: larger;
+}
+.profile_bottom > form {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.profile_bottom > form > textarea {
+  height: 150px;
+  width: 350px;
+  font-size: 16px;
+  padding-left: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.profile_bottom > form > input {
+  width: 350px;
+  height: 50px;
+  font-size: 20px;
+  padding-left: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.profile_bottom > form > button {
+  width: 350px;
+  height: 50px;
+  font-size: large;
+  color: #fff;
+  background-color: #1abc9c;
+  border-radius: 5px;
+  border: none;
+}
+
+
 .profile__left {
   flex: 0.4;
   display: flex;
@@ -56,10 +109,3 @@
   padding-left: 0 !important;
   background-color: rgba(215, 241, 246, 0.982);
 }
-
-.delete_message {
-  background: #f1e5cc;
-  padding: 10px;
-  border-radius: 8px;
-}
-
