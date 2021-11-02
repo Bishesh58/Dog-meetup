@@ -1,8 +1,5 @@
 import React, { useRef, useState } from "react";
 import "./Contact.css";
-import axios from "axios";
-import { sendMail } from "../redux/apiCalls";
-import { useDispatch } from "react-redux";
 import emailjs from "emailjs-com";
 
 function Contact() {

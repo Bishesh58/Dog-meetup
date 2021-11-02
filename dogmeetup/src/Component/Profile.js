@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Profile.css";
 import { Avatar, Button, CircularProgress } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
@@ -11,9 +11,9 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { useHistory } from "react-router";
+import {  useHistory } from "react-router";
 import { logout } from "../redux/authSlice";
-import { fetchUser, addNewReview } from "../redux/apiCalls";
+import { addNewReview } from "../redux/apiCalls";
 
 function Profile() {
   const dispatch = useDispatch();
@@ -21,7 +21,8 @@ function Profile() {
 
   const auth = useSelector((state) => state.auth);
   const { userDetails } = useSelector((state) => state.user);
-  const review = useSelector((state) => state.reviews)
+  const review = useSelector((state) => state.reviews);
+  
 
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -32,7 +33,7 @@ function Profile() {
   const [lastname, setLastname] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [result, setResult] = useState(null)
+  const [result, setResult] = useState(null);
 
   const handleEditSubmit = (e) => {
     e.preventDefault();
@@ -41,12 +42,13 @@ function Profile() {
 
   const handleDeleteSubmit = async (e) => {
     e.preventDefault();
-    await axios.delete(`/api/users/${auth.userInfo._id}`, {
+    await axios.delete(`/api/users/${auth.userInfo}`, {
       data: { password },
     });
-    setOpen(false);
-    history.push("/login");
     dispatch(logout());
+    setOpen(false);
+    history.push("/login")
+    document.getElementById("heading_title").innerHTML = "Sorry for letting you go!"
   };
 
   const handleDeleteBtn = async (e) => {
@@ -64,19 +66,18 @@ function Profile() {
     setIsDeleting(false);
   };
 
-
   const handleSubmitReview = async (e) => {
     e.preventDefault();
     const payload = {
       profilepic: userDetails?.profilepic,
       email: userDetails.email,
-      fname:firstname,
-      lname:lastname,
+      fname: firstname,
+      lname: lastname,
       title,
       description,
-    }
-    addNewReview(payload, dispatch)
-    setResult("OK")
+    };
+    addNewReview(payload, dispatch);
+    setResult("OK");
     resetField();
   };
   const resetField = () => {
@@ -131,7 +132,8 @@ function Profile() {
                 {isDeleting ? (
                   <div>
                     <Button variant="outlined" onClick={handleClickOpen}>
-                    Deleting account cannot be undone.Are you sure you want to delete?
+                      Deleting account cannot be undone.Are you sure you want to
+                      delete?
                     </Button>
                     <Dialog open={open} onClose={handleClose}>
                       <DialogTitle>Enter your password</DialogTitle>
@@ -164,53 +166,55 @@ function Profile() {
           </div>
           <div className="profile_bottom">
             <h4>Write Review</h4>
-          <form onSubmit={handleSubmitReview}>
-            
-            {result === "OK" ?(<span
-              id="successMessage"
-              style={{ color: "purple", fontSize: "18px", padding: "15px" }}
-            >
-              Your review has been send..
-            </span>): null
-            }
-            
-            <input
-              placeholder="First Name"
-              type="fname"
-              value={firstname}
-              name="first_name"
-              required
-              onChange={(e) => setFirstname(e.target.value)}
-            />
+            <form onSubmit={handleSubmitReview}>
+              {result === "OK" ? (
+                <span
+                  id="successMessage"
+                  style={{ color: "purple", fontSize: "18px", padding: "15px" }}
+                >
+                  Your review has been send..
+                </span>
+              ) : null}
 
-            <input
-              placeholder="Last Name"
-              type="lname"
-              name="last_name"
-              value={lastname}
-              required
-              onChange={(e) => setLastname(e.target.value)}
-            />
-            <input
-              placeholder="Title"
-              type="text"
-              name="title"
-              value={title}
-              required
-              onChange={(e) => setTitle(e.target.value)}
-            />
-            
-            <textarea
-              placeholder="Description"
-              type="messageBox"
-              required
-              value={description}
-              name="description"
-              onChange={(e) => setDescription(e.target.value)}
-            ></textarea>
+              <input
+                placeholder="First Name"
+                type="fname"
+                value={firstname}
+                name="first_name"
+                required
+                onChange={(e) => setFirstname(e.target.value)}
+              />
 
-            <button type="submit">{review.isLoading ? <CircularProgress size="30px" /> : "Submit"}</button>
-          </form>
+              <input
+                placeholder="Last Name"
+                type="lname"
+                name="last_name"
+                value={lastname}
+                required
+                onChange={(e) => setLastname(e.target.value)}
+              />
+              <input
+                placeholder="Title"
+                type="text"
+                name="title"
+                value={title}
+                required
+                onChange={(e) => setTitle(e.target.value)}
+              />
+
+              <textarea
+                placeholder="Description"
+                type="messageBox"
+                required
+                value={description}
+                name="description"
+                onChange={(e) => setDescription(e.target.value)}
+              ></textarea>
+
+              <button type="submit">
+                {review.isLoading ? <CircularProgress size="30px" /> : "Submit"}
+              </button>
+            </form>
           </div>
         </>
       )}
