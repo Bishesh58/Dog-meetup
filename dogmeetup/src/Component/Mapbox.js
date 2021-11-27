@@ -44,6 +44,7 @@ function Mapbox() {
     latitude: userDetails ? userDetails.lat : -36.848461,
     longitude: userDetails ? userDetails.long : 174.763336,
     zoom: 13,
+    setStyle: "mapbox://styles/mapbox/streets-v11",
   });
 
   const [settings, setSettings] = useState({
@@ -204,7 +205,7 @@ function Mapbox() {
         {...settings}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX}
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
-        mapStyle="mapbox://styles/bisheshsunam/cksfztp1p0xsk17luuy3w7udz"
+        mapStyle="mapbox://styles/bisheshsunam/ckwhald8i47im14oqek88fx02"
         onDblClick={handleNewEvent}
       >
         {userDetails && (
