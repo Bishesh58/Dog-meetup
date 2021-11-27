@@ -181,7 +181,7 @@ function Mapbox() {
     const res =
       await axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/
     ${userDetails.long},${userDetails.lat};${long},${lat}
-    ?steps=true&geometries=geojson&access_token=pk.eyJ1IjoiYmlzaGVzaHN1bmFtIiwiYSI6ImNrcm40Z3g1bjgwbTYyb3BhaTYzazRkaHMifQ.sKBOMc0QI4adcKRF3KN7-w`);
+    ?steps=true&geometries=geojson&access_token=${process.env.REACT_APP_MAPBOX}`);
     setPoint(res.data.routes[0].geometry.coordinates);
     //console.log(res.data.routes[0])
     setSteps(res.data.routes[0].legs[0].steps);
