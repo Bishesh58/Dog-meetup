@@ -48,7 +48,9 @@
 
 .banner__bottomLeft {
   flex: 0.6;
-  height: 400px;
+  height: 600px;
+  padding-left: 30px;
+  margin-bottom: 16px;
 }
 
 .banner__bottomLeft > img {
